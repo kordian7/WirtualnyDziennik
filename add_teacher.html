@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Logowanie</title>
+<style>
+html,body {
+  height:100%;
+  width:100%;
+  margin:0;
+  
+}
+body {
+  display:flex;
+}
+form {
+  margin:auto;/* nice thing of auto margin if display:flex; it center both horizontal and vertical :) */
+	margin-top:10%;
+  }
+</style>
+</head>
+
+<body>
+		
+		
+	<form method=post>
+		
+		<div style="padding-bottom:100px; text-align:center; font-size:24px; width:100%">
+		Dodawanie nowego użytkownika
+		</div>
+		<table>
+			<tr>
+				<td>
+					Imie:
+				</td>
+				
+				<td>
+					<input type=text name="imie" required="true">
+				
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					Nazwisko:
+				</td>
+				
+				<td>
+					<input type=text name="nazwisko" required="true">
+				
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					Pesel:
+				</td>
+				
+				<td>
+					<input type=text name="pesel" required="true">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					Numer Telefonu:
+				</td>
+				
+				<td>
+					 <input type=text name="tel">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					Rodzaj uzytkownika:
+				</td>
+				
+				<td>
+					<input type="checkbox" name="uzytTyp" value="Nauczyciel"> Nauczyciel
+					<input type="checkbox" name="uzytTyp" value="Uczen"> Uczeń
+					<input type="checkbox" name="uzytTyp" value="Rodzic"> Rodzic
+					
+				
+				</td>
+			
+			</tr>
+			
+			<tr>
+			
+			<td colspan=2 >
+			<div style="text-align:center; padding-top:20px">
+				<input  type=submit value="Dodaj użytkownika">
+			</div>
+				
+			</td>
+			
+			</tr>
+			
+		</table>
+		
+		
+	</form>
+</body>
+</html>
