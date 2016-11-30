@@ -23,16 +23,40 @@ form {
 <body>
 <br/>
 	<?php 
-	if(isset($_COOKIE['logged']) && $_COOKIE['logged']==1)	{
-		echo "Juz zalogowany";
-	} else {
+	include "baza.php";
+	
+	header("Cache-Control: no-store, no-cache, must-revalidate");  
+	header("Cache-Control: post-check=0, pre-check=0, max-age=0", false);
+	header("Pragma: no-cache");
+
+	
+	foreach($_COOKIE as $key=>$value) {
+	$_COOKIE[$key] = mysqli_real_escape_string($connection, $value);
+	}
+
+	if(isset($_COOKIE['id'])) {
+		$checkuser = mysqli_fetch_assoc(mysqli_query($connection,
+		"select ses_us_id from Session where id = '{$_COOKIE[id]}' and
+		web ='{$_SERVER['HTTP_USER_AGENT']}' and ip = '{$_SERVER['REMOTE_ADDR']}';"));
+	if(!empty($checkuser['ses_us_id'])) {
+		header("location:index.php");
+		exit;
+	}
+	}
+	else {
+	
 	echo	
 	'<form action="login_submit.php" method=post>
 		
 		<div style="padding-bottom:150px; text-align:center; font-size:28px; width:100%">
 		Logowanie
-		</div>
-		
+		</div>';
+	if($_GET['access'] == 'denied') {
+		echo '<div style="padding-bottom:15px">
+		Blad logowania
+		</div>';
+	}
+	echo '
 		<div style="padding-bottom:15px">
 		Login: <input type=text name="username" required="true">
 		</div>

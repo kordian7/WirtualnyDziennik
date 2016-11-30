@@ -10,24 +10,44 @@
 <?php
 include "baza.php";
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
-	$username = mysql_real_escape_string($_POST['username']);
-	$password = mysql_real_escape_string($_POST['password']);
-	$checkuser = mysql_query("SELECT * FROM User where Username = '".$username."' and hashed_pwd = '".$password."'");
-	if(mysql_num_rows($checkuser) == 1)
-    {
-        $row = mysql_fetch_array($checklogin);
-         
-        setcookie("username", $username);
-        setcookie("logged", 1);
-         
-        echo "<h1>Success</h1>";
-    }
-    else
-    {
-        echo "<h1>Error</h1>";
-        echo "<p>Zle dane logowania <a href=\"login.php\">Nacisnij by sprobowac ponownie</a>.</p>";
-    }
+foreach ($_POST as $key=>$value) {
+	$_POST[$key] = mysqli_real_escape_string($connection, $value);
+}
+
+if(isset($_POST['username'])) {
+	$query = mysqli_query($connection, "SELECT count(*) cnt, us_id 
+	FROM User where Username = '{$_POST['username']}' and hashed_pwd = '".md5($_POST['password'])."';");
+	$checkuser = mysqli_fetch_assoc($query);
+	
+	if($checkuser['cnt']) {
+		$id = md5(rand(-10000, 10000) . microtime()) . md5(crc32(microtime()) . 
+			$_SERVER['REMOTE_ADDR']);
+		mysqli_query($connection, "delete from Session where ses_us_id = '{$checkuser['us_id']}';");
+		mysqli_query($connection, "insert into Session(ses_us_id, id, ip, web) values
+		({$checkuser['us_id']}, '{$id}', '{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['HTTP_USER_AGENT']}');");
+		if(mysqli_errno($connection)) {
+			echo "blad przy logowaniu!";
+			header("location:login.php");
+			exit;
+		} else {
+			setcookie("id", $id);
+			echo "<br>zalogowano";
+			header("location:index.php");
+			exit;
+			// przekierowanie
+		}
+		
+		
+	} else {
+		echo "zle dane logowania";
+		header("location:login.php?access=denied");
+		exit;
+	}
+ 
+	
+} else {
+	header("location:login.php");
+	exit;
 };
 
 
