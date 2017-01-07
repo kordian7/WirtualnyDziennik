@@ -1,0 +1,421 @@
+-- --------------------------------------------------------
+-- Host:                         sirius.fmi.pk.edu.pl
+-- Wersja serwera:               5.5.52 - MySQL Community Server (GPL)
+-- Serwer OS:                    Linux
+-- HeidiSQL Wersja:              9.4.0.5125
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Zrzut struktury bazy danych kkurdziel
+CREATE DATABASE IF NOT EXISTS `kkurdziel` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `kkurdziel`;
+
+-- Zrzut struktury tabela kkurdziel.Absence
+CREATE TABLE IF NOT EXISTS `Absence` (
+  `ABS_ID` int(11) NOT NULL,
+  `ST_ID` int(11) NOT NULL,
+  `COUR_ID` int(11) NOT NULL,
+  `Absence_date` date NOT NULL,
+  `ABT_ID` int(11) NOT NULL,
+  PRIMARY KEY (`ABS_ID`),
+  KEY `Absence_fk0` (`ST_ID`),
+  KEY `Absence_fk1` (`COUR_ID`),
+  KEY `Absence_fk2` (`ABT_ID`),
+  CONSTRAINT `Absence_fk0` FOREIGN KEY (`ST_ID`) REFERENCES `Student` (`UZ_ID`),
+  CONSTRAINT `Absence_fk1` FOREIGN KEY (`COUR_ID`) REFERENCES `Course` (`COUR_ID`),
+  CONSTRAINT `Absence_fk2` FOREIGN KEY (`ABT_ID`) REFERENCES `Absence_Type` (`AB_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Absence: ~0 rows (około)
+DELETE FROM `Absence`;
+/*!40000 ALTER TABLE `Absence` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Absence` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Absence_Type
+CREATE TABLE IF NOT EXISTS `Absence_Type` (
+  `AB_ID` int(11) NOT NULL,
+  `Type` varchar(100) NOT NULL,
+  PRIMARY KEY (`AB_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Absence_Type: ~0 rows (około)
+DELETE FROM `Absence_Type`;
+/*!40000 ALTER TABLE `Absence_Type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Absence_Type` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Class
+CREATE TABLE IF NOT EXISTS `Class` (
+  `class_id` int(11) NOT NULL,
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Class: ~0 rows (około)
+DELETE FROM `Class`;
+/*!40000 ALTER TABLE `Class` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Class` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Class_Course
+CREATE TABLE IF NOT EXISTS `Class_Course` (
+  `class_course_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  PRIMARY KEY (`class_course_id`),
+  KEY `Class_Course_fk0` (`class_id`),
+  KEY `Class_Course_fk1` (`course_id`),
+  CONSTRAINT `Class_Course_fk0` FOREIGN KEY (`class_id`) REFERENCES `Class` (`class_id`),
+  CONSTRAINT `Class_Course_fk1` FOREIGN KEY (`course_id`) REFERENCES `Course` (`COUR_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Class_Course: ~0 rows (około)
+DELETE FROM `Class_Course`;
+/*!40000 ALTER TABLE `Class_Course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Class_Course` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Course
+CREATE TABLE IF NOT EXISTS `Course` (
+  `COUR_ID` int(11) NOT NULL,
+  `TYPE_ID` int(11) NOT NULL,
+  PRIMARY KEY (`COUR_ID`),
+  KEY `Course_fk0` (`TYPE_ID`),
+  CONSTRAINT `Course_fk0` FOREIGN KEY (`TYPE_ID`) REFERENCES `Course_Type` (`COURTP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Course: ~0 rows (około)
+DELETE FROM `Course`;
+/*!40000 ALTER TABLE `Course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Course` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Course_Type
+CREATE TABLE IF NOT EXISTS `Course_Type` (
+  `COURTP_ID` int(11) NOT NULL,
+  `course_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`COURTP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Course_Type: ~0 rows (około)
+DELETE FROM `Course_Type`;
+/*!40000 ALTER TABLE `Course_Type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Course_Type` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Exam
+CREATE TABLE IF NOT EXISTS `Exam` (
+  `EX_ID` int(11) NOT NULL,
+  `COUR_ID` int(11) NOT NULL,
+  `EX_TYPE_ID` int(11) NOT NULL,
+  PRIMARY KEY (`EX_ID`),
+  KEY `Exam_fk0` (`COUR_ID`),
+  KEY `Exam_fk1` (`EX_TYPE_ID`),
+  CONSTRAINT `Exam_fk0` FOREIGN KEY (`COUR_ID`) REFERENCES `Course` (`COUR_ID`),
+  CONSTRAINT `Exam_fk1` FOREIGN KEY (`EX_TYPE_ID`) REFERENCES `Exam_Type` (`EXT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Exam: ~0 rows (około)
+DELETE FROM `Exam`;
+/*!40000 ALTER TABLE `Exam` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Exam` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Exam_Result
+CREATE TABLE IF NOT EXISTS `Exam_Result` (
+  `EX_RES` int(11) NOT NULL,
+  `EX_ID` int(11) NOT NULL,
+  `ST_ID` int(11) NOT NULL,
+  `mark_id` int(11) NOT NULL,
+  `comment` varchar(500) NOT NULL,
+  PRIMARY KEY (`EX_RES`),
+  KEY `Exam_Result_fk0` (`EX_ID`),
+  KEY `Exam_Result_fk1` (`ST_ID`),
+  KEY `Exam_Result_fk2` (`mark_id`),
+  CONSTRAINT `Exam_Result_fk0` FOREIGN KEY (`EX_ID`) REFERENCES `Exam` (`EX_ID`),
+  CONSTRAINT `Exam_Result_fk1` FOREIGN KEY (`ST_ID`) REFERENCES `Student` (`UZ_ID`),
+  CONSTRAINT `Exam_Result_fk2` FOREIGN KEY (`mark_id`) REFERENCES `Mark` (`MARK_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Exam_Result: ~0 rows (około)
+DELETE FROM `Exam_Result`;
+/*!40000 ALTER TABLE `Exam_Result` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Exam_Result` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Exam_Type
+CREATE TABLE IF NOT EXISTS `Exam_Type` (
+  `EXT_ID` int(11) NOT NULL,
+  `ext_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`EXT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Exam_Type: ~0 rows (około)
+DELETE FROM `Exam_Type`;
+/*!40000 ALTER TABLE `Exam_Type` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Exam_Type` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.kart1
+CREATE TABLE IF NOT EXISTS `kart1` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `x1` varchar(10) DEFAULT NULL,
+  `x2` varchar(10) DEFAULT NULL,
+  `wynik` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.kart1: ~4 rows (około)
+DELETE FROM `kart1`;
+/*!40000 ALTER TABLE `kart1` DISABLE KEYS */;
+INSERT INTO `kart1` (`id`, `x1`, `x2`, `wynik`) VALUES
+	(13, '1', '11', '8.87305813'),
+	(14, '1', '11', '8.87305813'),
+	(15, '1', '12', '9.73717467'),
+	(16, '1', '11', '8.87305813');
+/*!40000 ALTER TABLE `kart1` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Login_History
+CREATE TABLE IF NOT EXISTS `Login_History` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) NOT NULL DEFAULT '0',
+  `ip` varchar(39) NOT NULL DEFAULT '0',
+  `time_of_login` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `failed` int(1) NOT NULL DEFAULT '0',
+  `blocked_login` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Login_History: ~5 rows (około)
+DELETE FROM `Login_History`;
+/*!40000 ALTER TABLE `Login_History` DISABLE KEYS */;
+INSERT INTO `Login_History` (`id`, `login`, `ip`, `time_of_login`, `failed`, `blocked_login`) VALUES
+	(25, 'admin', '149.156.136.191', '2016-12-08 10:34:04', 1, 0),
+	(26, 'admin', '149.156.136.191', '2016-12-08 10:37:49', 1, 1),
+	(27, 'admin', '89.64.47.92', '2016-12-08 23:28:31', 0, 0),
+	(28, 'asdad', '78.11.192.98', '2017-01-07 22:05:49', 1, 1),
+	(29, 'admin', '78.11.192.98', '2017-01-07 22:05:54', 0, 0);
+/*!40000 ALTER TABLE `Login_History` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Mark
+CREATE TABLE IF NOT EXISTS `Mark` (
+  `MARK_ID` int(11) NOT NULL,
+  `mark_value` float NOT NULL,
+  PRIMARY KEY (`MARK_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Mark: ~0 rows (około)
+DELETE FROM `Mark`;
+/*!40000 ALTER TABLE `Mark` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Mark` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Parent
+CREATE TABLE IF NOT EXISTS `Parent` (
+  `parent_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`parent_id`),
+  CONSTRAINT `Parent_fk0` FOREIGN KEY (`parent_id`) REFERENCES `User` (`US_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Parent: ~0 rows (około)
+DELETE FROM `Parent`;
+/*!40000 ALTER TABLE `Parent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Parent` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Parent_student
+CREATE TABLE IF NOT EXISTS `Parent_student` (
+  `parent_student_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  PRIMARY KEY (`parent_student_id`),
+  KEY `Parent_student_fk0` (`parent_id`),
+  KEY `Parent_student_fk1` (`student_id`),
+  CONSTRAINT `Parent_student_fk0` FOREIGN KEY (`parent_id`) REFERENCES `Parent` (`parent_id`),
+  CONSTRAINT `Parent_student_fk1` FOREIGN KEY (`student_id`) REFERENCES `Student` (`UZ_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Parent_student: ~0 rows (około)
+DELETE FROM `Parent_student`;
+/*!40000 ALTER TABLE `Parent_student` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Parent_student` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Person
+CREATE TABLE IF NOT EXISTS `Person` (
+  `pr_id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `surname` varchar(100) DEFAULT NULL,
+  `pesel` varchar(11) NOT NULL,
+  `us_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`pr_id`),
+  KEY `us_id_fk` (`us_id`),
+  CONSTRAINT `us_id_fk` FOREIGN KEY (`us_id`) REFERENCES `User` (`us_id`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Person: ~1 rows (około)
+DELETE FROM `Person`;
+/*!40000 ALTER TABLE `Person` DISABLE KEYS */;
+INSERT INTO `Person` (`pr_id`, `name`, `surname`, `pesel`, `us_id`) VALUES
+	(1, 'Jan', 'Kowalski', '90101012345', 1);
+/*!40000 ALTER TABLE `Person` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Role_Type
+CREATE TABLE IF NOT EXISTS `Role_Type` (
+  `role_id` int(10) NOT NULL AUTO_INCREMENT,
+  `role` varchar(30) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Role_Type: ~4 rows (około)
+DELETE FROM `Role_Type`;
+/*!40000 ALTER TABLE `Role_Type` DISABLE KEYS */;
+INSERT INTO `Role_Type` (`role_id`, `role`) VALUES
+	(1, 'admin'),
+	(2, 'teacher'),
+	(3, 'student'),
+	(4, 'parent');
+/*!40000 ALTER TABLE `Role_Type` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Session
+CREATE TABLE IF NOT EXISTS `Session` (
+  `ses_id` int(10) NOT NULL AUTO_INCREMENT,
+  `ses_us_id` int(10) NOT NULL,
+  `id` varchar(64) NOT NULL,
+  `los` varchar(39) DEFAULT NULL,
+  `ip` varchar(39) DEFAULT NULL,
+  `web` varchar(200) DEFAULT NULL,
+  `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `role` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`ses_id`),
+  KEY `ses_us_id_fk` (`ses_us_id`),
+  CONSTRAINT `ses_us_id_fk` FOREIGN KEY (`ses_us_id`) REFERENCES `User` (`us_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Session: ~1 rows (około)
+DELETE FROM `Session`;
+/*!40000 ALTER TABLE `Session` DISABLE KEYS */;
+INSERT INTO `Session` (`ses_id`, `ses_us_id`, `id`, `los`, `ip`, `web`, `time`, `role`) VALUES
+	(59, 1, '3f532d7fa701ed442dd380177d9a785275a13e9c5bac819122f624d6dda2f8b2', NULL, '78.11.192.98', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0', '2017-01-07 22:05:54', NULL);
+/*!40000 ALTER TABLE `Session` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Student
+CREATE TABLE IF NOT EXISTS `Student` (
+  `UZ_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  PRIMARY KEY (`UZ_ID`),
+  KEY `Student_fk1` (`class_id`),
+  CONSTRAINT `Student_fk0` FOREIGN KEY (`UZ_ID`) REFERENCES `User` (`US_ID`),
+  CONSTRAINT `Student_fk1` FOREIGN KEY (`class_id`) REFERENCES `Class` (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Student: ~0 rows (około)
+DELETE FROM `Student`;
+/*!40000 ALTER TABLE `Student` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Student` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Student_Course
+CREATE TABLE IF NOT EXISTS `Student_Course` (
+  `SG_ID` int(11) NOT NULL,
+  `ST_ID` int(11) NOT NULL,
+  `COURSE_ID` int(11) NOT NULL,
+  PRIMARY KEY (`SG_ID`),
+  KEY `Student_Course_fk0` (`ST_ID`),
+  KEY `Student_Course_fk1` (`COURSE_ID`),
+  CONSTRAINT `Student_Course_fk0` FOREIGN KEY (`ST_ID`) REFERENCES `Student` (`UZ_ID`),
+  CONSTRAINT `Student_Course_fk1` FOREIGN KEY (`COURSE_ID`) REFERENCES `Course` (`COUR_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Student_Course: ~0 rows (około)
+DELETE FROM `Student_Course`;
+/*!40000 ALTER TABLE `Student_Course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Student_Course` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Teacher
+CREATE TABLE IF NOT EXISTS `Teacher` (
+  `T_ID` int(11) NOT NULL,
+  KEY `Teacher_fk0` (`T_ID`),
+  CONSTRAINT `Teacher_fk0` FOREIGN KEY (`T_ID`) REFERENCES `User` (`US_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Teacher: ~0 rows (około)
+DELETE FROM `Teacher`;
+/*!40000 ALTER TABLE `Teacher` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Teacher` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Teacher_Class
+CREATE TABLE IF NOT EXISTS `Teacher_Class` (
+  `TCOUR_ID` int(11) NOT NULL,
+  `T_ID` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  PRIMARY KEY (`TCOUR_ID`),
+  KEY `Teacher_Class_fk0` (`T_ID`),
+  KEY `Teacher_Class_fk1` (`class_id`),
+  CONSTRAINT `Teacher_Class_fk0` FOREIGN KEY (`T_ID`) REFERENCES `Teacher` (`T_ID`),
+  CONSTRAINT `Teacher_Class_fk1` FOREIGN KEY (`class_id`) REFERENCES `Class` (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Teacher_Class: ~0 rows (około)
+DELETE FROM `Teacher_Class`;
+/*!40000 ALTER TABLE `Teacher_Class` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Teacher_Class` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.Teacher_Course
+CREATE TABLE IF NOT EXISTS `Teacher_Course` (
+  `TCOUR_ID` int(11) NOT NULL,
+  `T_ID` int(11) NOT NULL,
+  `COUR_ID` int(11) NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  PRIMARY KEY (`TCOUR_ID`),
+  KEY `Teacher_Course_fk0` (`T_ID`),
+  KEY `Teacher_Course_fk1` (`COUR_ID`),
+  CONSTRAINT `Teacher_Course_fk0` FOREIGN KEY (`T_ID`) REFERENCES `Teacher` (`T_ID`),
+  CONSTRAINT `Teacher_Course_fk1` FOREIGN KEY (`COUR_ID`) REFERENCES `Course` (`COUR_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.Teacher_Course: ~0 rows (około)
+DELETE FROM `Teacher_Course`;
+/*!40000 ALTER TABLE `Teacher_Course` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Teacher_Course` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.User
+CREATE TABLE IF NOT EXISTS `User` (
+  `us_id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `hashed_pwd` varchar(200) NOT NULL,
+  `salt` varchar(20) NOT NULL,
+  PRIMARY KEY (`us_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.User: ~7 rows (około)
+DELETE FROM `User`;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` (`us_id`, `username`, `hashed_pwd`, `salt`) VALUES
+	(1, 'admin', '60154b578768a692806b6c1cdf3341b4fde3c3a4', 'VvmiBzOsJiEuruCtdIBI'),
+	(2, 'aaaa', '', ''),
+	(3, '', 'd253ac1c1413b5e2d1c0a8bae44890b7', ''),
+	(4, 'admin', '', ''),
+	(5, 'zxczxc', '', ''),
+	(6, 'zzz', '', ''),
+	(7, '123', '', '');
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+
+-- Zrzut struktury tabela kkurdziel.User_Role
+CREATE TABLE IF NOT EXISTS `User_Role` (
+  `usrole_id` int(10) NOT NULL AUTO_INCREMENT,
+  `US_ID` int(11) NOT NULL,
+  `RLTYPE_ID` int(11) NOT NULL,
+  PRIMARY KEY (`usrole_id`),
+  KEY `User_Role_fk0` (`US_ID`),
+  KEY `User_Role_fk1` (`RLTYPE_ID`),
+  CONSTRAINT `User_Role_fk0` FOREIGN KEY (`US_ID`) REFERENCES `User` (`US_ID`),
+  CONSTRAINT `User_Role_fk1` FOREIGN KEY (`RLTYPE_ID`) REFERENCES `Role_Type` (`ROLE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Zrzucanie danych dla tabeli kkurdziel.User_Role: ~1 rows (około)
+DELETE FROM `User_Role`;
+/*!40000 ALTER TABLE `User_Role` DISABLE KEYS */;
+INSERT INTO `User_Role` (`usrole_id`, `US_ID`, `RLTYPE_ID`) VALUES
+	(1, 1, 1);
+/*!40000 ALTER TABLE `User_Role` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
