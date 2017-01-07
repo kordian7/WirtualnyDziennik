@@ -14,7 +14,7 @@ include "loginUtils.php";
 	<form method=post action="add_student_submit.php">
 		
 		<div style="padding-bottom:100px; text-align:center; font-size:24px; width:100%">
-		Dodawanie nowego ucznia
+		Dodawanie Nowego Ucznia
 		</div>
 		<table>
 			<tr>
