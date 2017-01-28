@@ -16,14 +16,14 @@ foreach ($_POST as $key=>$value) {
 
 if(isset($_POST['username'])) {
 	$query = mysqli_query($connection, "SELECT count(*) cnt, us_id 
-	FROM User where Username = '{$_POST['username']}' and hashed_pwd = '".md5($_POST['password'])."';");
+	FROM user where username = '{$_POST['username']}' and hashed_pwd = '".md5($_POST['password'])."';");
 	$checkuser = mysqli_fetch_assoc($query);
 	
 	if($checkuser['cnt']) {
 		$id = md5(rand(-10000, 10000) . microtime()) . md5(crc32(microtime()) . 
 			$_SERVER['REMOTE_ADDR']);
-		mysqli_query($connection, "delete from Session where ses_us_id = '{$checkuser['us_id']}';");
-		mysqli_query($connection, "insert into Session(ses_us_id, id, ip, web) values
+		mysqli_query($connection, "delete from session where ses_us_id = '{$checkuser['us_id']}';");
+		mysqli_query($connection, "insert into session(ses_us_id, id, ip, web) values
 		({$checkuser['us_id']}, '{$id}', '{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['HTTP_USER_AGENT']}');");
 		if(mysqli_errno($connection)) {
 			echo "blad przy logowaniu!";

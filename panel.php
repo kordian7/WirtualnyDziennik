@@ -12,15 +12,15 @@
 <?php
 include "loginUtils.php";
 echo '<br> Witaj w panelu użytkownika<br><br>';
-$person = mysqli_fetch_assoc(mysqli_query($connection, "select pr_id, name, surname, pesel from Person where pr_id = {$us_id};"));
+$person = mysqli_fetch_assoc(mysqli_query($connection, "select pr_id, name, surname, pesel from person where pr_id = {$pr_id};"));
 if(!empty($person['pr_id'])) {
 	echo "Twoje dane: <br>
+
 	Id: {$person['pr_id']} <br>
 	Imie: {$person['name']} <br>
 	Nazwisko: {$person['surname']} <br>
 	Pesel: {$person['pesel']} <br>";
 }
-	
 ?>
 
 
