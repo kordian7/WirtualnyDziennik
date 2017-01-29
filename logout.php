@@ -7,7 +7,7 @@
 <body>
 <?php
 
-if(isset($_COOKIE['id']) && $_COOKIE['id']==1) {
+if(isset($_COOKIE['id'])) {
         setcookie("id", null, -1);
 };
 

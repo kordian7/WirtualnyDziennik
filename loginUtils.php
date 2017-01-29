@@ -14,7 +14,7 @@ if(isset($_COOKIE['id'])) {
     where id = '{$_COOKIE[id]}' and
 	web ='{$_SERVER['HTTP_USER_AGENT']}' and ip = '{$_SERVER['REMOTE_ADDR']}';"));
 	if(empty($session_arr['ses_us_id'])) {
-		header("location:login.php");
+		header("location:/~kokurd/login.php");
 		exit;
 	} else {
         checkUserRole($session_arr['role']);
@@ -40,13 +40,23 @@ if(isset($_GET['logout'])) {
 
 function checkUserRole($role){
     $arr = explode("/", $_SERVER['PHP_SELF'], 4);
-    if (strpos($arr[2], '.php') !== false || $arr[2] === $role)
+
+    if (strpos($arr[2], '.php') !== false || $arr[2] === $role){
         return;
+
+    }
     else {
         header("location:/~kokurd/index.php");
         exit;
     }
 }
 
+function getIndexPath($role) {
+    if($role != null) {
+        return "location:/~kokurd/default/index.php";
+    } else {
+        return "location:/~kokurd/".$role."/index.php";
+    }
+}
 
 ?>

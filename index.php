@@ -5,15 +5,14 @@
 <title>Wirtualny dziennik</title>
 </head>  
 <body>  
-<a href="index.php">Homepage</a>
-<a href="panel.php">Panel użytkownika</a>
-<a href="?logout">Wyloguj</a>
-<br/>
+
 <?php
 include "loginUtils.php";
+include "protected/menu.php";
+createMenu($session_arr['ses_us_id']);
 
-
-echo "<br>
+echo "
+<div class='main' /> <br>
 Witaj na stronie glownej
 <br> 
 Zalogowany uzytkownik o ID: ".$checkuser['ses_us_id'];

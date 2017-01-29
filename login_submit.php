@@ -18,7 +18,10 @@ if(isset($_POST['username'])) {
 	$query = mysqli_query($connection, "SELECT count(*) cnt, us_id 
 	FROM user where username = '{$_POST['username']}' and hashed_pwd = '".md5($_POST['password'])."';");
 	$checkuser = mysqli_fetch_assoc($query);
-	
+
+    $user_role_result = mysqli_query($connection, "select role_id, role from v_user_role where us_id = {$checkuser['us_id']};");
+    $user_role_ass = mysqli_fetch_assoc($user_role_result);
+
 	if($checkuser['cnt']) {
 		$id = md5(rand(-10000, 10000) . microtime()) . md5(crc32(microtime()) . 
 			$_SERVER['REMOTE_ADDR']);
@@ -31,19 +34,19 @@ if(isset($_POST['username'])) {
 			exit;
 		} else {
 			setcookie("id", $id);
-
-            $user_role_result = mysqli_query($connection, "select role_id from user_role where us_id = {$checkuser['us_id']};");
+            $role = null;
 
             if (mysqli_num_rows($user_role_result) == 1) {
-                $user_role_ass = mysqli_fetch_assoc($user_role_result);
-                mysqli_query($connection, "update session set role_id = {$user_role_ass['role_id']} 
+                setcookie("testRole", $user_role_ass['role_id']);
+                mysqli_query($connection, "update session set role_id = {$user_role_ass['role_id']}
                 where ses_us_id = {$checkuser['us_id']};");
+                $role = $user_role_ass['role'];
             } elseif (mysqli_num_rows($user_role_result) > 1) {
                 header("location:wybor_roli.php");
                 exit;
             }
 
-			header("location:index.php");
+			header(getIndexPath($role));
 			exit;
 			// przekierowanie
 		}
@@ -57,10 +60,17 @@ if(isset($_POST['username'])) {
  
 	
 } else {
-	header("location:login.php");
+    header("location:login.php");
 	exit;
 };
 
+function getIndexPath($role) {
+    if($role == null) {
+        return "location:/~kokurd/default/index.php";
+    } else {
+        return "location:/~kokurd/".$role."/index.php";
+    }
+}
 
 ?>
 </body>
