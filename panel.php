@@ -5,8 +5,8 @@
 <title>Wirtualny dziennik</title>
 </head>  
 <body>  
-<a href="index.php">Homepage</a>
-<a href="panel.php">Panel użytkownika</a>
+<a href="/~kokurd/index.php">Homepage</a>
+<a href="/~kokurd/panel.php">Panel użytkownika</a>
 <a href="?logout">Wyloguj</a>
 <br/>
 <?php

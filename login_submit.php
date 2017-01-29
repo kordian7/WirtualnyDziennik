@@ -39,7 +39,8 @@ if(isset($_POST['username'])) {
                 mysqli_query($connection, "update session set role_id = {$user_role_ass['role_id']} 
                 where ses_us_id = {$checkuser['us_id']};");
             } elseif (mysqli_num_rows($user_role_result) > 1) {
-                // TODO - wybor roli
+                header("location:wybor_roli.php");
+                exit;
             }
 
 			header("location:index.php");

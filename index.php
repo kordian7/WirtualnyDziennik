@@ -18,6 +18,10 @@ Witaj na stronie glownej
 <br> 
 Zalogowany uzytkownik o ID: ".$checkuser['ses_us_id'];
 
+foreach($_SERVER as $key=>$value) {
+    echo "<br/>".$key." : ".$value;
+}
+
 ?>
 
 
