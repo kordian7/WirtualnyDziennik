@@ -31,7 +31,17 @@ if(isset($_POST['username'])) {
 			exit;
 		} else {
 			setcookie("id", $id);
-			echo "<br>zalogowano";
+
+            $user_role_result = mysqli_query($connection, "select role_id from user_role where us_id = {$checkuser['us_id']};");
+
+            if (mysqli_num_rows($user_role_result) == 1) {
+                $user_role_ass = mysqli_fetch_assoc($user_role_result);
+                mysqli_query($connection, "update session set role_id = {$user_role_ass['role_id']} 
+                where ses_us_id = {$checkuser['us_id']};");
+            } elseif (mysqli_num_rows($user_role_result) > 1) {
+                // TODO - wybor roli
+            }
+
 			header("location:index.php");
 			exit;
 			// przekierowanie

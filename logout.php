@@ -7,9 +7,8 @@
 <body>
 <?php
 
-if(isset($_COOKIE['logged']) && $_COOKIE['logged']==1) {
-        setcookie("username", null, -1);
-        setcookie("logged", null, -1);
+if(isset($_COOKIE['id']) && $_COOKIE['id']==1) {
+        setcookie("id", null, -1);
 };
 
 header('Location: index.php');

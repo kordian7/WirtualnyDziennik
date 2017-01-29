@@ -36,27 +36,33 @@ form {
 
 	if(isset($_COOKIE['id'])) {
 		$checkuser = mysqli_fetch_assoc(mysqli_query($connection,
-		"select ses_us_id from Session where id = '{$_COOKIE[id]}' and
+		"select ses_us_id from session where id = '{$_COOKIE[id]}' and
 		web ='{$_SERVER['HTTP_USER_AGENT']}' and ip = '{$_SERVER['REMOTE_ADDR']}';"));
 	if(!empty($checkuser['ses_us_id'])) {
 		header("location:index.php");
 		exit;
-	}
+	} else {
+        setcookie("id", null, -1);
+        drawForm();
+    }
 	}
 	else {
-	
-	echo	
-	'<form action="login_submit.php" method=post>
+        drawForm();
+	}
+
+	function drawForm() {
+        echo
+        '<form action="login_submit.php" method=post>
 		
 		<div style="padding-bottom:150px; text-align:center; font-size:28px; width:100%">
 		Logowanie
 		</div>';
-	if($_GET['access'] == 'denied') {
-		echo '<div style="padding-bottom:15px">
+        if($_GET['access'] == 'denied') {
+            echo '<div style="padding-bottom:15px">
 		Blad logowania
 		</div>';
-	}
-	echo '
+        }
+        echo '
 		<div style="padding-bottom:15px">
 		Login: <input type=text name="username" required="true">
 		</div>
@@ -68,7 +74,7 @@ form {
 		<input  type=submit value="Zaloguj">
 		</div>
 	</form>';
-	}
+    }
 	?>
 </body>
 </html>
