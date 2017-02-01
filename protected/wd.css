@@ -70,11 +70,11 @@ body {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 70px;
+    top: 60px;
     left: 0;
     background-color: #004080;
     overflow-x: hidden;
-    padding-top: 60px;
+    padding-top: 50px;
 }
 
 .sidemenu a {

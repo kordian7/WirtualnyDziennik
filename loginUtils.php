@@ -4,6 +4,27 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0, max-age=0", false);
 header("Pragma: no-cache");
 
+function checkIfLogged() {
+    foreach($_COOKIE as $key=>$value) {
+        $_COOKIE[$key] = mysqli_real_escape_string(getConnection(), $value);
+    }
+
+    if(isset($_COOKIE['id'])) {
+        $session_arr = mysqli_fetch_assoc(mysqli_query(getConnection(),
+            "select ses_us_id, role from session where id = '{$_COOKIE[id]}' and
+	          web ='{$_SERVER['HTTP_USER_AGENT']}' and ip = '{$_SERVER['REMOTE_ADDR']}';"));
+        if(empty($session_arr['ses_us_id'])) {
+            return false;
+        } else {
+            mysqli_query($connection, "update session set time = CURRENT_TIMESTAMP where id =
+		    '{$_COOKIE['id']}' and web = '{$_SERVER['HTTP_USER_AGENT']}' and ip = '{$_SERVER['REMOTE_ADDR']}' ;");
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+
 foreach($_COOKIE as $key=>$value) {
 	$_COOKIE[$key] = mysqli_real_escape_string($connection, $value);
 }
@@ -17,6 +38,8 @@ if(isset($_COOKIE['id'])) {
 		header("location:/~kokurd/login.php");
 		exit;
 	} else {
+        mysqli_query($connection, "update session set time = CURRENT_TIMESTAMP where id =
+		'{$_COOKIE['id']}' and web = '{$_SERVER['HTTP_USER_AGENT']}' and ip = '{$_SERVER['REMOTE_ADDR']}' ;");
         checkUserRole($session_arr['role']);
         $us_id = $session_arr['ses_us_id'];
         $person = mysqli_fetch_assoc(mysqli_query($connection,
