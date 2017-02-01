@@ -64,13 +64,6 @@ if(isset($_POST['username'])) {
 	exit;
 };
 
-function getIndexPath($role) {
-    if($role == null) {
-        return "location:/~kokurd/default/index.php";
-    } else {
-        return "location:/~kokurd/".$role."/index.php";
-    }
-}
 
 ?>
 </body>

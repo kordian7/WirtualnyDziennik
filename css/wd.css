@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+}
+
+.main {
+    margin-top: 60px;
+    margin-left: 8px;
+}
+
+.topmenu-div ul {
+    margin: 0;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #003366;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.topmenu li {
+    float: left;
+
+}
+
+.topmenu-div li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+.topmenu-div li a:hover {
+    background-color: #a6a6a6;
+}
+
+.topmenu-div li .topmenu-userinfo {
+    display: inline-block;
+}
+
+.topmenu-div .topmenu-userinfo-content {
+    display: none;
+    position: fixed;
+    margin-left: 50px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.topmenu-div .topmenu-userinfo-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+
+.topmenu-div .topmenu-userinfo-content a:hover {
+    background-color: #f2f2f2;
+}
+
+.topmenu .show-menu {
+    display:block;
+}
+
+.sidemenu {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    background-color: #004080;
+    overflow-x: hidden;
+    padding-top: 50px;
+}
+
+.sidemenu a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+}
+.sidemenu a:hover {
+    background-color: #a6a6a6;
+}
+.cookie-info {
+
+    z-index: 2;
+    position: fixed;
+    background-color: #e6e6e6;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}

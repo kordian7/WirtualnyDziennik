@@ -1,20 +1,15 @@
 <?php
 
-include_once "baza.php";
+include_once "../baza.php";
 
 
-function createMenu($us_id) {
-
-
-    global $connection;
-
-    $m_user = mysqli_fetch_assoc(mysqli_query($connection,
-        "select pr_id from user where us_id = '{$us_id}';"));
-    $m_user = mysqli_fetch_assoc(mysqli_query($connection,
-        "select pr_id from user where us_id = '{$us_id}';"));
+function createMenu() {
+    $us_id = getUserId();
+    $m_user = mysqli_fetch_assoc(mysqli_query(getConnection(),
+        "select pr_id from user where us_id = {$us_id};"));
     $m_pr_id = $m_user['pr_id'];
-    $m_person = mysqli_fetch_assoc(mysqli_query($connection, "select pr_id, name, surname, pesel from person where pr_id = {$m_pr_id};"));
-    $session_arr = mysqli_fetch_assoc(mysqli_query($connection,
+    $m_person = mysqli_fetch_assoc(mysqli_query(getConnection(), "select pr_id, name, surname, pesel from person where pr_id = {$m_pr_id};"));
+    $session_arr = mysqli_fetch_assoc(mysqli_query(getConnection(),
         "select role from session left join role_type on session.role_id = role_type.role_id
     where ses_us_id = {$us_id};"));
     $m_role =  $session_arr['role'];
@@ -40,17 +35,25 @@ function createMenu($us_id) {
 <div class='topmenu-div'>
     <ul class=\"topmenu\">";
     if($m_role != null) {
-        echo "<li style='padding-left: 20px'> <a href='javascript:void(0)' onclick=\"toggleSideMenu()\">&#9776;</a> </li>";
+        echo "<li> <a href='javascript:void(0)' onclick=\"toggleSideMenu()\"><span class=\"glyphicon glyphicon-menu-hamburger\" /> </a> </li>";
     }
-    echo "<li style='padding-left: 30px' class='topmenu-userinfo'> <a href=\"#\" class=\"topmenu-userinfo-btn\" onClick='showUserinfoMenu()' >{$m_person['name']} {$m_person['surname']} Zalogowany jako: {$roleStr} </a>
+
+    echo "<li > <a href='/~kokurd\' >
+            <span class=\"glyphicon glyphicon-home\" />     
+                </a> </li>
+            <li style='padding-left: 40px' class='topmenu-userinfo'> 
+                
+                <a href=\"javascript:void(0)\"  class=\"topmenu-userinfo-btn\" onClick='showUserinfoMenu()' >
+                    {$m_person['name']} {$m_person['surname']} Zalogowany jako: {$roleStr} </a>
             <div class='topmenu-userinfo-content' id='myUserinfoContent' >
                 <a href='#'> Moje dane </a>
                 <a href='#'> Zmien swoja funkcje </a>
+
             </div>
         </li>
-        <li style='float: right; padding-right: 60px'> <a href=\"?logout\">Wyloguj</a> </li>
-        <li style='float: right; padding-right: 30px'> <a href=\"\~kokurd/index.php\">Strona glowna</a> </li>
-        
+        <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/logout.php\"><span class=\"glyphicon glyphicon-log-out\" /> </a> </li>
+          <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/kontakt.php\">Kontakt</a> </li>
+        <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/about_us.php\">Informacje o stronie</a> </li>
     </ul>
 </div>";
 if($m_role != null) {
@@ -60,9 +63,28 @@ if($m_role != null) {
 }
 echo "
 <script>
+    
+    function setMainWidth() {
+        document.getElementsByClassName(\"main\")[0].style.marginLeft = \"208px\";
+    }
+    window.onload = setMainWidth;
     function showUserinfoMenu() {
         document.getElementById(\"myUserinfoContent\").classList.toggle(\"show-menu\");
     }
+    
+    window.onclick = function(event) {
+  if (!event.target.matches('.topmenu-userinfo-btn')) {
+
+    var dropdowns = document.getElementsByClassName(\"topmenu-userinfo-content\");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show-menu')) {
+        openDropdown.classList.remove('show-menu');
+      }
+    }
+  }
+}
     
     function toggleSideMenu() {
         console.log(document.getElementsByClassName('sidemenu')[0].style.width);
@@ -77,19 +99,34 @@ echo "
             document.getElementsByClassName(\"main\")[0].style.marginLeft = \"8px\";
         }
     }
-    
-    function loadCSS() {
-        var file = document.createElement(\"link\");
-        file.setAttribute(\"rel\", \"stylesheet\");
-       file.setAttribute(\"type\", \"text/css\");
-       file.setAttribute(\"href\", \"/~kokurd/protected/wd.css\");
-       document.head.appendChild(file);
-    }
-    
-    loadCSS();
+    ";
+    if($m_role != null) {
+        echo "window.onload = setMainWidth;";
+    };
+ echo "
 </script>";
 
 }
+
+function createPublicMenu() {
+
+    echo "
+<div class='topmenu-div'>
+    <ul class=\"topmenu\">";
+    echo "
+        <li > <a href='/~kokurd\' >
+            <span class=\"glyphicon glyphicon-home\" />     
+                </a> </li>
+        <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/login.php\">Zaloguj</a> </li>
+        <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/kontakt.php\">Kontakt</a> </li>
+        <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/about_us.php\">Informacje o stronie</a> </li>
+        
+    </ul>
+</div>";
+
+}
+
+
 
 function createSideMenuContent($m_role) {
     switch($m_role) {
@@ -115,6 +152,45 @@ function createSideMenuContent($m_role) {
             ";
         default:
             return "";
+    }
+}
+
+function createHead() {
+    header("Cache-Control: no-store, no-cache, must-revalidate");
+    header("Cache-Control: post-check=0, pre-check=0, max-age=0", false);
+    header("Pragma: no-cache");
+    echo "
+    <head>  
+<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8_polish_ci\" />  
+<title>Wirtualny dziennik</title>
+
+<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>
+    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
+     <script src=\"js/scripts.js\" type='text/javascript'></script>
+<link rel='stylesheet' href='/~kokurd/css/wd.css' type='text/css' />
+
+</head> 
+";
+}
+
+function createFooter() {
+    showCookie();
+}
+
+function showCookie() {
+    if(!isset($_COOKIE['showCookie'])) {
+        setcookie("showCookie", "true");
+    }
+    if ($_COOKIE['showCookie']=='true') {
+        echo "
+            <div class='cookie-info' id='cookie-info-id'>
+                <strong>
+                    Strona korzysta z plików Cookies zgodnie z polityką plików cookies. Zamykając tą informację zgadzasz się na to. 
+                    </strong>
+                    <span onclick='setShowCookieFalse()' class=\"glyphicon glyphicon-remove\"></span>
+            </div>
+        ";
     }
 }
 
