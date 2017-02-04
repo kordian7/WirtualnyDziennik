@@ -15,4 +15,41 @@ function getStudentMarksFromCourse($st_id, $cr_id) {
     return $st_marks;
 }
 
+function getTeacherActiveCourses($t_id) {
+    $st_cours = mysqli_query(getConnection(),
+        "select cour_id, course_name, c_year, classes from v_teacher_course WHERE t_id = "
+        .$t_id." and c_year = "
+        .getCurrentSchoolYear());
+    return $st_cours;
+}
+
+function getCourseStudents($c_id) {
+    $st = mysqli_query(getConnection(),
+        "select st_id, name, surname from v_student_course WHERE course_id =".
+        $c_id);
+    return $st;
+}
+
+function getCourseExams($c_id) {
+     $ex = mysqli_query(getConnection(),
+         "select ex_id, nazwa from exam WHERE cour_id =".
+         $c_id);
+    return $ex;
+}
+
+function getMark($ex_id, $st_id) {
+    $res = mysqli_fetch_assoc(mysqli_query(getConnection(),
+        "select mark_id from exam_result where ex_id="
+    .$ex_id." and st_id="
+    .$st_id));
+    return $res['mark_id'];
+}
+
+function getExamInfo($ex_id) {
+     $res = mysqli_query(getConnection(),
+         "select ex_id, cour_id, ex_type_id, nazwa, comment from exam where ex_id="
+         .$ex_id);
+     return $res;
+}
+
 ?>

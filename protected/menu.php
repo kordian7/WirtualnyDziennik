@@ -139,7 +139,7 @@ function createSideMenuContent($m_role) {
             ";
         case "teacher":
             return "
-            <a href=\"#\">Adm 1</a>
+            <a href=\"/~kokurd/teacher/add_marks.php\">Dodaj oceny</a>
             <a href=\"#\">Adm 2</a>
             ";
         case "student":
