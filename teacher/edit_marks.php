@@ -48,7 +48,7 @@ if(isset($_POST['exam-id'])) {
         }
     }
 
-    header("Location: /~kokurd/teacher/add_marks.php");
+    header("Location: /~kokurd/teacher/add_marks.php?course_id=".$examInfo['cour_id']);
     exit;
 }
 createMenu();
