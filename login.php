@@ -25,7 +25,6 @@ if(isset($_POST['username'])) {
 
     $user_role_result = mysqli_query(getConnection(), "select role_id, role from v_user_role where us_id = {$checkuser['us_id']};");
     $user_role_ass = mysqli_fetch_assoc($user_role_result);
-
     if($checkuser['cnt']) {
         $id = md5(rand(-10000, 10000) . microtime()) . md5(crc32(microtime()) .
                 $_SERVER['REMOTE_ADDR']);
@@ -33,7 +32,7 @@ if(isset($_POST['username'])) {
         mysqli_query(getConnection(), "insert into session(ses_us_id, id, ip, web) values
 		({$checkuser['us_id']}, '{$id}', '{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['HTTP_USER_AGENT']}');");
         if(mysqli_errno(getConnection())) {
-            header("location:login.php?access=database_error");
+            header("Location:login.php?access=database_error");
             exit;
         } else {
             setcookie("id", $id);
@@ -42,12 +41,15 @@ if(isset($_POST['username'])) {
         ( '{$_SERVER['REMOTE_ADDR']}', '{$_POST['username']}', 'good_login');");
             mysqli_query(getConnection(), "update user_logs set type='bad_login_u' where type='bad_login' and 
             us_username='{$_POST['username']}' and TIMESTAMPDIFF(MINUTE, time, now()) < 30;");
+
+
             if (mysqli_num_rows($user_role_result) == 1) {
                 mysqli_query($connection, "update session set role_id = {$user_role_ass['role_id']}
                 where ses_us_id = {$checkuser['us_id']};");
                 $role = $user_role_ass['role'];
             } elseif (mysqli_num_rows($user_role_result) > 1) {
-                header("location:wybor_roli.php");
+
+                header("Location: /~kokurd/default/role_change.php");
                 exit;
             }
 
@@ -61,7 +63,7 @@ if(isset($_POST['username'])) {
         mysqli_query(getConnection(), "insert into user_logs(ip, us_username, type ) values 
         ( '{$_SERVER['REMOTE_ADDR']}', '{$_POST['username']}', 'bad_login');");
        
-        header("location:login.php?access=denied");
+        header("Location:login.php?access=denied");
         exit;
     }
 };
@@ -113,5 +115,6 @@ form {
 		<input  type=submit value="Zaloguj">
 		</div>
 	</form>';
+<?php createFooter(); ?>
 </body>
 </html>

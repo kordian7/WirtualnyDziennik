@@ -29,6 +29,6 @@ if (mysqli_num_rows($user_role_result) < 2) {
 
 ?>
 
-
+<?php reateFooter(); ?>
 </body>
 </html>

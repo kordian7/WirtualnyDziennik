@@ -27,5 +27,6 @@ if(checkIfLogged()) {
 
 
 </div>
+<?php createFooter(); ?>
 </body>
 </html>

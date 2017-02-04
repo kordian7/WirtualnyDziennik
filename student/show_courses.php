@@ -4,6 +4,7 @@
 <?php
 include "../login_utils.php";
 include "../protected/menu.php";
+include_once "../school_db_utils.php";
 
 createHead();
 if(!checkIfLogged()) {
@@ -12,22 +13,30 @@ if(!checkIfLogged()) {
 if(!checkUserRole(getUserRole())) {
     header("Location: ".getIndexPath(getUserRole()));
 }
-createMenu();
-echo "<br>
+createMenu(); ?>
+<br>
 <div class='main'>
-Student
-Witaj na stronie glownej
-<br> 
-Zalogowany uzytkownik o ID: ".getUserId()."
+Lista Twoich obecnych przedmiotów:
+<br>
+<table>
+    <th>
+        <td>Nazwa przedmiotu</td>
+    </th>
+    <?php
+    $courses = getStudentActiveCourses(getPersonId(getUserId()));
+    while($cr = mysqli_fetch_assoc($courses)) {
+    echo "
+    <tr>
+    <td><a href='show_marks.php?cr_id=".$cr['course_id']."'>".$cr['course_name']."</a></td>
+    </tr>
+    ";
+    }
 
-";
+    ?>
+</table>
 
-foreach($_SERVER as $key=>$value) {
-    echo "<br/>".$key." : ".$value;
-}
-echo "</div>";
-?>
 
+</div>
 <?php createFooter(); ?>
 </body>
 </html>

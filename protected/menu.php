@@ -46,9 +46,12 @@ function createMenu() {
                 <a href=\"javascript:void(0)\"  class=\"topmenu-userinfo-btn\" onClick='showUserinfoMenu()' >
                     {$m_person['name']} {$m_person['surname']} Zalogowany jako: {$roleStr} </a>
             <div class='topmenu-userinfo-content' id='myUserinfoContent' >
-                <a href='#'> Moje dane </a>
-                <a href='#'> Zmien swoja funkcje </a>
+                <a href='/~kokurd/default/edytuj_dane.php'> Moje dane </a>
+                <a href='/~kokurd/default/change_password.php'> Zmiana hasła </a>";
 
+                if(count(getAvailableRoles()) > 1)
+                    echo "<a href='/~kokurd/default/role_change.php'> Zmien swoja funkcje </a>";
+            echo "
             </div>
         </li>
         <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/logout.php\"><span class=\"glyphicon glyphicon-log-out\" /> </a> </li>
@@ -67,7 +70,6 @@ echo "
     function setMainWidth() {
         document.getElementsByClassName(\"main\")[0].style.marginLeft = \"208px\";
     }
-    window.onload = setMainWidth;
     function showUserinfoMenu() {
         document.getElementById(\"myUserinfoContent\").classList.toggle(\"show-menu\");
     }
@@ -132,8 +134,8 @@ function createSideMenuContent($m_role) {
     switch($m_role) {
         case "admin":
             return "
-            <a href=\"#\">Adm 1</a>
-            <a href=\"#\">Adm 2</a>
+            <a href=\"/~kokurd/admin/add_person.php\">Dodaj osobę</a>
+            <a href=\"/~kokurd/admin/add_user.php\">Dodaj Użytkownika</a>
             ";
         case "teacher":
             return "
@@ -142,7 +144,7 @@ function createSideMenuContent($m_role) {
             ";
         case "student":
             return "
-            <a href=\"#\">Adm 1</a>
+            <a href=\"/~kokurd/student/show_courses.php\">Pokaż przedmioty</a>
             <a href=\"#\">Adm 2</a>
             ";
         case "parent":
@@ -163,13 +165,20 @@ function createHead() {
     <head>  
 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8_polish_ci\" />  
 <title>Wirtualny dziennik</title>
+      <script src=\"/~kokurd/js/jquery-3.1.1.min.js\" type='text/javascript'></script>
 
 <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
-    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
-     <script src=\"js/scripts.js\" type='text/javascript'></script>
-<link rel='stylesheet' href='/~kokurd/css/wd.css' type='text/css' />
+         <script src=\"http://harvesthq.github.io/chosen/chosen.jquery.js\"></script>
+     <script src=\"/~kokurd/js/scripts.js\" type='text/javascript'></script>
 
+     <link rel='stylesheet' href='/~kokurd/css/chosen.css' type='text/css' />
+<link rel='stylesheet' href='/~kokurd/css/wd.css' type='text/css' />
+<noscript>
+    <div class='noscript-div' style>
+        Twoja przeglądarka nie obsługuje JavaScriptu
+    </div>
+</noscript>
 </head> 
 ";
 }
@@ -180,7 +189,7 @@ function createFooter() {
 
 function showCookie() {
     if(!isset($_COOKIE['showCookie'])) {
-        setcookie("showCookie", "true");
+        setcookie("showCookie", "true",0,"/~kokurd/");
     }
     if ($_COOKIE['showCookie']=='true') {
         echo "
@@ -188,7 +197,7 @@ function showCookie() {
                 <strong>
                     Strona korzysta z plików Cookies zgodnie z polityką plików cookies. Zamykając tą informację zgadzasz się na to. 
                     </strong>
-                    <span onclick='setShowCookieFalse()' class=\"glyphicon glyphicon-remove\"></span>
+                    <span onclick='setShowCookieFalse()' class=\" close-btn glyphicon glyphicon-remove\"></span>
             </div>
         ";
     }

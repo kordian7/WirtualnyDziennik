@@ -10,14 +10,12 @@ if(!checkIfLogged()) {
     header("Location: /~kokurd/");
 }
 if(!checkUserRole(getUserRole())) {
-    if(getUserRole() != null)
-        header("Location: ".getIndexPath(getUserRole()));
+    header("Location: ".getIndexPath(getUserRole()));
 }
-
 createMenu();
 echo "<br>
 <div class='main'>
-Brak Roli
+Rodzic
 Witaj na stronie glownej
 <br> 
 Zalogowany uzytkownik o ID: ".getUserId()."
