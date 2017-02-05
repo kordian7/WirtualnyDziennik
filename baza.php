@@ -137,4 +137,14 @@ function ustawRole($us_id, $pr_id) {
     }
 }
 
+function getParentChildren($pr_id) {
+    $parChildren = mysqli_query(getConnection(), "select parent_id as par_id,
+     par_name, par_surname, st_id, st_name, st_surname from v_parent_student
+     where parent_id = "
+    .$pr_id);
+    return $parChildren;
+}
+
+
+
 ?>

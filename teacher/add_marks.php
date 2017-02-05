@@ -5,6 +5,7 @@
 include "../login_utils.php";
 include "../protected/menu.php";
 include_once "../school_db_utils.php";
+include_once "teacher_course.php";
 
 createHead();
 if(!checkIfLogged()) {
@@ -57,33 +58,8 @@ Lista prowadzonych kursów przez Ciebie:
             $cour = mysqli_escape_string(getConnection(), $_GET['course_id']);
             $exams = getCourseExams($cour);
             $students = getCourseStudents($cour);
-            echo "
-    <table>
-    <tr> <th>Student</th>";
-            $ex_cnt = 0;
-            while ($exam = mysqli_fetch_assoc($exams)) {
-                echo "<th> " . $exam['nazwa'] . " </th> ";
-                $ex_tab[$ex_cnt++] = $exam['ex_id'];
-            }
+            printTable();
 
-            echo "<th><form action='add_exam.php' method=POST> <input hidden name='course' value = " . $cour . "> <input type='submit' value='Dodaj Exam'> </form></th></tr>";
-            while ($stud = mysqli_fetch_assoc($students)) {
-                echo "<tr><td> " . $stud['name'] . " " . $stud['surname'] . " </td>";
-                for ($i = 0; $i < $ex_cnt; $i++) {
-                    echo "<td>" . getMark($ex_tab[$i], $stud['st_id']) . "</td>";
-                }
-                echo "</tr> ";
-            }
-            echo "<tr><td/>";
-            for ($i = 0; $i < $ex_cnt; $i++) {
-                echo "<td><form action='edit_marks.php' method=POST> <input hidden name='exam' value = " . $ex_tab[$i] . "> <input type='submit' value='Edytuj'> </form></td>";
-            }
-            echo "</tr><tr><td/>";
-            for ($i = 0; $i < $ex_cnt; $i++) {
-                echo "<td><form action='remove_exam.php' method=POST> <input hidden name='exam' value = " . $ex_tab[$i] . "> <input type='submit' value='Usuń'> </form></td>";
-            }
-            echo "</tr>";
-            echo "</table>";
         }
         ?>
 
@@ -104,10 +80,11 @@ $select1.on({
         if(selectVal != -1) {
             console.log( "test");
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/~kokurd/teacher/teacher_course.php",
                 data: {
-                    cour_id: selectVal
+                    course_id: selectVal,
+                    print: true
                 },
                 success: function(tabela) {
                     console.log( "Otrzymane dane: " + tabela );

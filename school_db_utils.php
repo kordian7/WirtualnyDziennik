@@ -45,11 +45,26 @@ function getMark($ex_id, $st_id) {
     return $res['mark_id'];
 }
 
+function getExamComment($ex_id, $st_id) {
+    $res = mysqli_fetch_assoc(mysqli_query(getConnection(),
+        "select comment from exam_result where ex_id="
+        .$ex_id." and st_id="
+        .$st_id));
+    return $res['comment'];
+}
+
 function getExamInfo($ex_id) {
      $res = mysqli_query(getConnection(),
          "select ex_id, cour_id, ex_type_id, nazwa, comment from exam where ex_id="
          .$ex_id);
      return $res;
+}
+
+function getCourseInfo($cr_id) {
+     $qr = mysqli_query(getConnection(), "select cour_id, year, course_name
+        from v_course where cour_id = "
+        .$cr_id);
+    return mysqli_fetch_assoc($qr);
 }
 
 ?>

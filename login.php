@@ -15,7 +15,7 @@ if(checkIfLogged()) {
 createPublicMenu();
 
 foreach ($_POST as $key=>$value) {
-    $_POST[$key] = mysqli_real_escape_string($connection, $value);
+    $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
 }
 
 if(isset($_POST['username'])) {

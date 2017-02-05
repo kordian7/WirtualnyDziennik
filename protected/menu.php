@@ -149,7 +149,7 @@ function createSideMenuContent($m_role) {
             ";
         case "parent":
             return "
-            <a href=\"#\">Adm 1</a>
+            <a href=\"/~kokurd/parent/show_courses.php\">Pokaż oceny</a>
             <a href=\"#\">Adm 2</a>
             ";
         default:

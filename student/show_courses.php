@@ -18,25 +18,62 @@ createMenu(); ?>
 <div class='main'>
 Lista Twoich obecnych przedmiotów:
 <br>
-<table>
-    <th>
-        <td>Nazwa przedmiotu</td>
-    </th>
-    <?php
-    $courses = getStudentActiveCourses(getPersonId(getUserId()));
-    while($cr = mysqli_fetch_assoc($courses)) {
-    echo "
-    <tr>
-    <td><a href='show_marks.php?cr_id=".$cr['course_id']."'>".$cr['course_name']."</a></td>
-    </tr>
-    ";
-    }
 
-    ?>
-</table>
+    Osoba: <select id="select-course" class="chosen-select" data-placeholder="Wybierz kurs: " id="id-kursu" >
+        <br>
+        <option> </option>
 
+        <?php
+        $courses = getStudentActiveCourses(getPersonId(getUserId()));
+        while($cr = mysqli_fetch_assoc($courses)) {
+            echo "
+                    <br>
+                    <option value={$cr['course_id']}  > {$cr['course_name']} </option>
+                ";
+        }
+        echo "</select>"; ?>
 
+        <div id="student-course-tab-containter">
+
+        </div>
 </div>
 <?php createFooter(); ?>
+
+<script type="text/javascript">
+
+    var $select1 = $('#select-course');
+
+    $select1.on({
+        'change' : function() {
+            var selectVal = $(this).find('option:selected').val();
+            if(selectVal != -1) {
+                console.log( "test");
+                $.ajax({
+                    type: "POST",
+                    url: "/~kokurd/student/student_course.php",
+                    data: {
+                        cour_id: selectVal
+                    },
+                    success: function(tabela) {
+                        console.log( "Otrzymane dane: " + tabela );
+                        $('#student-course-tab-containter').empty();
+                        $('#student-course-tab-containter').append(tabela);
+
+                    },
+                    error: function() {
+                        console.log( "Błąd połączenia");
+                    }
+                })
+
+            }
+        }
+    });
+
+    $select1.val(-1);
+
+
+
+</script>
+
 </body>
 </html>
