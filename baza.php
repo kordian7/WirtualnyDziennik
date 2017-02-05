@@ -86,6 +86,10 @@ function getPersonId($us_id) {
 
 function getPersonInfo($p_id) {
     $people_result = mysqli_fetch_assoc(mysqli_query(getConnection(), "select pr_id, name, surname, pesel, mail, phone_nr from person where pr_id = ".$p_id.";"));
+    foreach ($people_result as $key=>$value) {
+        $people_result[$key] = strip_tags($value);
+    }
+
     return $people_result;
 }
 

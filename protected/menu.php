@@ -8,7 +8,7 @@ function createMenu() {
     $m_user = mysqli_fetch_assoc(mysqli_query(getConnection(),
         "select pr_id from user where us_id = {$us_id};"));
     $m_pr_id = $m_user['pr_id'];
-    $m_person = mysqli_fetch_assoc(mysqli_query(getConnection(), "select pr_id, name, surname, pesel from person where pr_id = {$m_pr_id};"));
+    $m_person = getPersonInfo($m_pr_id);
     $session_arr = mysqli_fetch_assoc(mysqli_query(getConnection(),
         "select role from session left join role_type on session.role_id = role_type.role_id
     where ses_us_id = {$us_id};"));
@@ -171,6 +171,13 @@ function createHead() {
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
          <script src=\"http://harvesthq.github.io/chosen/chosen.jquery.js\"></script>
      <script src=\"/~kokurd/js/scripts.js\" type='text/javascript'></script>
+
+<!-- Bootstrap select -->
+<!-- Latest compiled and minified CSS -->
+<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css\">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src=\"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js\"></script>
 
      <link rel='stylesheet' href='/~kokurd/css/chosen.css' type='text/css' />
 <link rel='stylesheet' href='/~kokurd/css/wd.css' type='text/css' />

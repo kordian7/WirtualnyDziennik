@@ -24,10 +24,15 @@ if(isset($_POST['cour_id'])) {
         }
         echo "</tr> ";
     }
-    echo "<td/>";
+    echo "<tr><td/>";
     for ($i = 0; $i < $ex_cnt; $i++) {
         echo "<td><form action='edit_marks.php' method=POST> <input hidden name='exam' value = " . $ex_tab[$i] . "> <input type='submit' value='Edytuj'> </form></td>";
     }
+    echo "</tr><tr><td/>";
+    for ($i = 0; $i < $ex_cnt; $i++) {
+        echo "<td><form action='remove_exam.php' method=POST> <input hidden name='exam' value = " . $ex_tab[$i] . "> <input type='submit' value='Usuń'> </form></td>";
+    }
+    echo "</tr>";
     echo "</table>";
 }
 ?>

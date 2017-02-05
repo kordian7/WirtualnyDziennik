@@ -39,7 +39,7 @@ function getCourseExams($c_id) {
 
 function getMark($ex_id, $st_id) {
     $res = mysqli_fetch_assoc(mysqli_query(getConnection(),
-        "select mark_id from exam_result where ex_id="
+        "select mark as mark_id from exam_result where ex_id="
     .$ex_id." and st_id="
     .$st_id));
     return $res['mark_id'];

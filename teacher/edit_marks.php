@@ -33,18 +33,22 @@ if(isset($_POST['exam-id'])) {
         if($_POST['st-'.$st['st_id']] != null) {
             if (getMark($_POST['exam-id'], $st['st_id']) == null) {
 
-                mysqli_query(getConnection(), "insert into exam_result(ex_id, t_id, st_id, mark_id)
+                mysqli_query(getConnection(), "insert into exam_result(ex_id, t_id, st_id, mark)
             values("
                     . $_POST['exam-id'] . ", "
                     . $teacher_id . ", "
                     . $st['st_id'] . ", '"
                     . $_POST['st-' . $st['st_id']] . "')");
             } elseif(getMark($_POST['exam-id'], $st['st_id']) != $_POST['st-'.$st['st_id']]) {
-                mysqli_query(getConnection(), "update exam_result set mark_id = '"
+                mysqli_query(getConnection(), "update exam_result set mark = '"
                     . $_POST['st-' . $st['st_id']] . "' where ex_id = "
                     . $_POST['exam-id'] ." and st_id = "
                     . $st['st_id']);
             }
+        } elseif (getMark($_POST['exam-id'], $st['st_id']) != null) {
+            mysqli_query(getConnection(), "delete from exam_result where ex_id = "
+                . $_POST['exam-id'] ." and st_id = "
+                . $st['st_id']);
         }
     }
 
@@ -68,8 +72,15 @@ $examInfo = mysqli_fetch_assoc(getExamInfo($_POST['exam']));
         <td><input type="text" required="true" name="exam-name" value='<?php echo $examInfo['nazwa']; ?>' ></td>
         <?php
         while($st=mysqli_fetch_assoc($students)) {
-            echo "<tr><td>".$st['name']." ".$st['surname']."</td><td><input type='text' name='st-".$st['st_id']."' value='"
-            .getMark($_POST['exam'],$st['st_id'])."'></td></tr>";
+            echo "<tr><td>".$st['name']." ".$st['surname']."</td><td>
+            <select class=\"selectpicker show-tick\" title=\"Brak\" data-width=\"fit\" name='st-".$st['st_id']."' 
+            >
+                  ".getMarksOptions(getMark($_POST['exam'],$st['st_id']))."
+            </select></td></tr>";
+            
+           /*
+            <input type='text' name='st-".$st['st_id']."' value='"
+            .getMark($_POST['exam'],$st['st_id'])."'></td></tr>";*/
         }
         ?>
     <tr><td colspan="2"><input type="submit" value="Zapisz egzamin"> </td></tr>

@@ -30,7 +30,7 @@ if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
     while($st=mysqli_fetch_assoc($students)) {
         if($_POST['st-'.$st['st_id']] != null) {
 
-                mysqli_query(getConnection(), "insert into exam_result(ex_id, t_id, st_id, mark_id)
+                mysqli_query(getConnection(), "insert into exam_result(ex_id, t_id, st_id, mark)
             values("
                     . $exam_id . ", "
                     . $teacher_id . ", "
@@ -56,7 +56,11 @@ $students = getCourseStudents($_POST['course']);
         <td><input type="text" required="true" name="exam-name"  ></td>
         <?php
         while($st=mysqli_fetch_assoc($students)) {
-            echo "<tr><td>".$st['name']." ".$st['surname']."</td><td><input type='text' name='st-".$st['st_id']."'></td></tr>";
+            echo "<tr><td>".$st['name']." ".$st['surname']."</td><td>
+            <select class=\"selectpicker show - tick\" title=\"Brak\" data-width=\"fit\" name='st-".$st['st_id']."'
+            >
+                  ".getNewMarksOptions()."
+            </select></td></tr>";
         }
         ?>
     <tr><td colspan="2"><input type="submit" value="Dodaj egzamin"> </td></tr>
