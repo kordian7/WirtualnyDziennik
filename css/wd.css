@@ -111,3 +111,10 @@ body {
 .chosen-container {
     width: 220px !important;
 }
+
+.div-centered {
+    position: fixed;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+}

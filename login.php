@@ -69,52 +69,54 @@ if(isset($_POST['username'])) {
 };
 ?>
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>Logowanie</title>
-<style>
-html,body {
-  height:100%;
-  width:100%;
-  margin:0;
-}
-body {
-  display:flex;
-}
-form {
-  margin:auto;/* nice thing of auto margin if display:flex; it center both horizontal and vertical :) */
-	margin-top:10%;
-  }
-</style>
-</head>
-
 <body>
-<br/>
+<div class='main'>
 
-        <form action="login.php" method=post>
-		
-		<div style="padding-bottom:150px; text-align:center; font-size:28px; width:100%">
-		Logowanie
-		</div>
-            <?php
-        if($_GET['access'] == 'denied') {
-            echo '<div style="padding-bottom:15px">
-		Blad logowania
-		</div>';
-        }
-        ?>
-		<div style="padding-bottom:15px">
-		Login: <input type=text name="username" required="true">
-		</div>
-		<div>
-		Hasło: <input type=password name="password" required="true">
-		</div>
-		</br>
-		<div style="text-align:center; padding-top:20px">
-		<input  type=submit value="Zaloguj">
-		</div>
-	</form>';
+<style>
+    .div-login {
+        position: fixed;
+        left: 50%;
+        top: 35%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<?php
+if($_GET['access'] == 'denied') {
+    echo '<div class="alert alert-danger alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error</strong> Błąd logowania
+            </div>';
+}
+?>
+
+
+    <div class="div-login" style="width:500px">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 28px">Logowanie</h1>
+        </div>
+
+
+        <form class="form-horizontal" action="login.php" method=post>
+            <div  class="form-group">
+                <label for="inputLogin" class="col-sm-3 control-label">Login:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputLogin" type=text  placeholder="Login" name="username" required="true">
+                </div>
+            </div>
+            <div  class="form-group">
+                <label for="inputPassword" class="col-sm-3 control-label">Hasło:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputLogin" type=password name="password"  placeholder="Hasło"  required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary btn-sm" type=submit value="Zaloguj">
+                </div>
+            </div>
+	</form>
+    </div>
 <?php createFooter(); ?>
 </body>
 </html>

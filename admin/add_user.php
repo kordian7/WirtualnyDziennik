@@ -53,17 +53,6 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
 ?>
 <br>
 <div class='main'>
@@ -77,40 +66,52 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
     }
 ?>
 
-Dodawanie nowego użytkownika
-    <form action="add_user.php" method=POST>
-        <table class="form-table">
 
-        <tr><td>
-                Login: </td><td> <input type=text name="username" id="login" onblur="checkLogin();" required="true"> </td> <span id="login-check"> </span>
-        </tr>
-        <tr><td>
-                Osoba: </td><td><select class="chosen-select" data-placeholder="Wybierz użytkownika" name="person" >
-                    <br>
-                    <option> </option>
+    <div class="div-centered" style="width:500px ; top: 30%">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 28px">Dodawanie nowego użytkownika</h1>
+        </div>
+    <form  class="form-horizontal" action="add_user.php" method=POST>
+        <div id="login-div" class="form-group">
+            <label for="login" class="col-sm-3 control-label">Login:</label>
+            <div class="col-sm-9">
+                <input class="form-control"  type=text name="username" id="login" placeholder="Login" onblur="checkLogin();" required="true">  <span id="login-check"> </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Osoba" class="col-sm-3 control-label">Osoba:</label>
+            <div class="col-sm-9">
+                <select class="chosen-select" data-placeholder="Wybierz użytkownika" name="person" >
+                        <br>
+                        <option> </option>
 
-        <?php
-            $people = getPeopleWithNoUser();
-            while($person = mysqli_fetch_assoc($people)) {
-                echo "
+                        <?php
+                        $people = getPeopleWithNoUser();
+                        while($person = mysqli_fetch_assoc($people)) {
+                            echo "
                     <br>
                     <option value={$person['pr_id']}  > {$person['surname']}  {$person['name']} {$person['pesel']} </option>
                 ";
-            }
+                        }
 
-        ?>
-        </select>
-            </td></tr>
+                        ?>
+                    </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <input class="btn btn-primary btn-sm" type=submit value="Dodaj użytkownika">
+            </div>
+        </div>
+
         <!-- Dodawanie admina tylko w bazie???
         <tr><td>
                Administrator: </td><td> <input  type="checkbox" name="admin" value="true" > </td>
         </tr>
         -->
-        <tr><td colspan="2">
-            <input  type=submit value="Dodaj użytkownika">
-                </td></tr>
-        </table>
     </form>
+
+    </div>
 <script type="text/javascript">
     var XMLHttp = getXMLHttp();
 
@@ -124,8 +125,14 @@ Dodawanie nowego użytkownika
     }
 
     function handler() {
-        if(XMLHttp.readyState == 4) {
-            document.getElementById('login-check').innerHTML=XMLHttp.responseText;
+        if (XMLHttp.readyState == 4) {
+            if (XMLHttp.responseText == "Zajęty") {
+                $('#login-div').removeClass("has-success");
+                $('#login-div').addClass("has-error");
+            } else {
+                $('#login-div').removeClass("has-error");
+                $('#login-div').addClass("has-success");
+            }
         }
     }
 

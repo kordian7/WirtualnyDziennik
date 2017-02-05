@@ -10,8 +10,7 @@ if(!checkIfLogged()) {
     header("Location: /~kokurd/");
 }
 
-createMenu();
-// Transaction!!!!!!!
+
 mysqli_autocommit(getConnection(),FALSE);
 $person = getPersonInfo(getPersonId(getUserId()));
 
@@ -44,46 +43,67 @@ if(isset($_POST['mail']) && $_POST['mail'] != null) {
 
 
 }
-
+createMenu();
 ?>
 <br>
 <div class='main'>
 <?php
     if(isset($_GET['success']) && $_GET['success'] == 'true' ) {
         echo "
-            <div class='success'>
-                Dane zmienione
+            <div class=\"alert alert-success alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Sukces</strong> Dane zmienione
             </div>
+
         ";
     }
 ?>
 
-Dodawanie nowego użytkownika
-    <form action="edytuj_dane.php" method=POST onsubmit="return validateForm()">
+    <div class="div-centered" style="width:500px; top:45%">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 28px">Edycja danych</h1>
+        </div>
+
+
+    <form class="form-horizontal" action="edytuj_dane.php" method=POST onsubmit="return validateForm()">
         <table class="form-table">
-
-            <tr><td>
-                    Imię: </td><td> <input type=text disabled value=<?php echo $person['name'];?>> </td>
-            </tr>
-            <tr><td>
-                    Nazwisko: </td><td> <input type=text disabled value=<?php echo $person['surname'];?>>
-            </tr>
-            <tr><td>
-                    Pesel: </td><td> <input type=text disabled value=<?php echo $person['pesel'];?>>
-            </tr>
-            <tr><td>
-                    Mail: </td><td> <input type=text name="mail" required="true" value=<?php echo $person['mail'];?>>
-            </tr>
-            <tr><td>
-                    Nr telefonu: </td><td> <input type=text maxlength="9" name="phone-nr" id="phone-nr" value=<?php echo $person['phone_nr'];?>>
-            </tr>
-
-
-        <tr><td colspan="2">
-            <input  type=submit value="Edytuj dane">
-                </td></tr>
-        </table>
+            <div class="form-group">
+                <label for="inputName" class="col-sm-3 control-label">Imię:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputName" type=text disabled value=<?php echo $person['name'];?>>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSurname" class="col-sm-3 control-label">Nazwisko:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputSurname" type=text disabled value=<?php echo $person['surname'];?>>
+                </div>
+            </div>
+            <div id="pesel-div" class="form-group">
+                <label for="pesel" class="col-sm-3 control-label">Pesel:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="pesel" type=text disabled value=<?php echo $person['pesel'];?>>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mail" class="col-sm-3 control-label">Mail:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type="email" placeholder="Mail" name="mail" required="true" value=<?php echo $person['mail'];?>>
+                </div>
+            </div>
+            <div id="phone-div" class="form-group">
+                <label for="phone-nr" class="col-sm-3 control-label">Nr telefonu:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" type=text maxlength="9" placeholder="Numer telefonu" name="phone-nr" id="phone-nr" value=<?php echo $person['phone_nr'];?>>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary btn-sm" type=submit value="Edytuj dane">
+                </div>
+            </div>
     </form>
+    </div>
 
 </div>
 <script>
@@ -94,7 +114,10 @@ Dodawanie nowego użytkownika
         var ret = true;
         if(document.getElementById("phone-nr").value != "") {
             if(!document.getElementById("phone-nr").value.match(nrPatt)){
+                document.getElementById("phone-div").className += " has-error";
                 ret = false;
+            } else {
+                $('#phone-div').removeClass("has-error");
             }
         }
         return ret;

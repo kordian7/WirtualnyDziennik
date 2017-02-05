@@ -10,7 +10,7 @@ if(!checkIfLogged()) {
     header("Location: /~kokurd/");
 }
 
-createMenu();
+
 // Transaction!!!!!!!
 $user = getUserInfo(getUserId());
 
@@ -34,67 +34,79 @@ if(isset($_POST['old-password']) && $_POST['old-password'] != null
             .$user['us_id']
             .";");
     }
-
-
-
-    header("Location: /~kokurd/default/edytuj_dane.php?success=true");
+    header("Location: /~kokurd/default/change_password.php?success=true");
     exit;
 
 
 }
-
+createMenu();
 ?>
 <br>
 <div class='main'>
 <?php
-    if(isset($_GET['success']) && $_GET['success'] == 'true' ) {
-        echo "
-            <div class='success'>
-                Hasło zmienione
+    if(isset($_GET['success'])) {
+        if($_GET['success'] == 'true' ) {
+            echo "
+            <div class=\"alert alert-success alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Sukces</strong> Hasło zmienione
             </div>
+
         ";
+        } elseif ($_GET['success'] == 'bad-pwd' ) {
+            echo "
+            <div class=\"alert alert-danger alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Error</strong> Błędne hasło
+            </div>
+
+        ";
+        } elseif ($_GET['success'] == 'diff-pwds' ) {
+            echo "
+            <div class=\"alert alert-danger alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Error</strong> Nowe hasła się nie zgadzają
+            </div>
+
+        ";
+        }
+
     }
+
 ?>
 
-Zmiana hasła
-    <form action="change_password.php" method=POST onsubmit="return validateForm()">
-        <table class="form-table">
-
-            <tr><td>
-                    Stare hasło: </td><td> <input type=password name="old-password" required="true"> </td>
-            </tr>
-            <tr><td>
-                    Nowe hasło: </td><td> <input type=password name="new-password" required="true"></td>
-            </tr>
-            <tr><td>
-                    Powtórz nowe: </td><td> <input type=password name="new-rep-password" required="true"></td>
-            </tr>
-
-
-        <tr><td colspan="2">
-            <input  type=submit value="Zmień hasło">
-                </td></tr>
-        </table>
+    <div class="div-centered" style="width:500px; top:35%">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 28px">Zmiana hasła</h1>
+        </div>
+        <form class="form-horizontal" action="change_password.php" method=POST >
+            <div class="form-group">
+                <label for="inputOldPwd" class="col-sm-3 control-label">Stare hasło:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputOldPwd" placeholder="Stare hasło" type=password name="old-password" required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputNewPwd1" class="col-sm-3 control-label">Nowe hasło:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputNewPwd1" placeholder="Nowe hasło" type=password name="new-password" required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputNewPwd2" class="col-sm-3 control-label">Powtórz nowe:</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="inputNewPwd2" placeholder="Powtórz nowe" type=password  name="new-rep-password" required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary btn-sm" type=submit value="Zmień hasło">
+                </div>
+            </div>
     </form>
+    </div>
 
 </div>
-<script>
-
-    function validateForm() {
-        var nrPatt = /^\d{9}$/;
-        var peselPatt = /^\d{11}$/;
-        var ret = true;
-        if(document.getElementById("phone-nr").value != "") {
-            if(!document.getElementById("phone-nr").value.match(nrPatt)){
-               ;// ret = false;
-            }
-        }
-        return ret;
-    }
-
-
-
-</script>
 <?php createFooter(); ?>
 </body>
 </html>
