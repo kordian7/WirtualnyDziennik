@@ -19,9 +19,10 @@ if(!isset($_POST['course']) && !isset($_POST['exam-id'])) {
 // Zapis ocen do bazy
 if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
     foreach ($_POST as $key=>$value) {
-        $_POST[$key] = mysqli_real_escape_string($connection, $value);
+        $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
     }
-    // TRANSAKCJA???
+    $_POST['exam-comment'] = strip_tags($_POST['exam-comment']);
+    mysqli_autocommit(getConnection(), false);
     $students = getCourseStudents($_POST['course-id']);
     $teacher_id = getPersonId(getUserId());
     if(isset($_POST['exam-comment']) && $_POST['exam-comment'] != null) {
@@ -41,6 +42,8 @@ if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
     while($st=mysqli_fetch_assoc($students)) {
         if($_POST['st-'.$st['st_id']] != null) {
             $comment = "";
+            $_POST['st-com-'.$st['st_id']] = mysqli_escape_string(getConnection(), $_POST['st-com-'.$st['st_id']]);
+            $_POST['st-com-'.$st['st_id']] = strip_tags($_POST['st-com-'.$st['st_id']]);
             if($_POST['st-com-'.$st['st_id']] != null) {
                 $comment = $_POST['st-com-'.$st['st_id']];
             }
@@ -54,7 +57,7 @@ if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
                     . $comment."')");
         }
     }
-
+    mysqli_commit(getConnection());
     header("Location: /~kokurd/teacher/add_marks.php?course_id=".$_POST['course-id']);
     exit;
 }

@@ -11,8 +11,7 @@ if(!checkIfLogged()) {
 }
 
 
-// Transaction!!!!!!!
-$user = getUserInfo(getUserId());
+
 
 if(isset($_POST['old-password']) && $_POST['old-password'] != null
 && isset($_POST['new-password']) && $_POST['new-password'] != null
@@ -21,7 +20,9 @@ if(isset($_POST['old-password']) && $_POST['old-password'] != null
     foreach($_POST as $key=>$value) {
         $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
     }
-    if(md5($_POST['old-password']) != $user['hashed_pwd']) {
+    mysqli_autocommit(getConnection(), false);
+    $user = getUserInfo(getUserId());
+    if($_POST['old-password'] != $user['hashed_pwd']) {
         header("Location: /~kokurd/default/change_password.php?success=bad-pwd");
         exit;
     } else if($_POST['new-password'] != $_POST['new-rep-password']) {
@@ -29,11 +30,12 @@ if(isset($_POST['old-password']) && $_POST['old-password'] != null
         exit;
     } else {
         mysqli_query(getConnection(),"update user set hashed_pwd = '"
-            .md5($_POST['new-password'])
+            .$_POST['new-password']
             ."' where us_id = "
             .$user['us_id']
             .";");
     }
+    mysqli_commit(getConnection());
     header("Location: /~kokurd/default/change_password.php?success=true");
     exit;
 
@@ -79,25 +81,28 @@ createMenu();
         <div class="page-header" style="text-align: center">
             <h1 style="font-size: 28px">Zmiana hasła</h1>
         </div>
-        <form class="form-horizontal" action="change_password.php" method=POST >
+        <form class="form-horizontal" action="change_password.php" method=POST onsubmit="return onSubmit();">
             <div class="form-group">
                 <label for="inputOldPwd" class="col-sm-3 control-label">Stare hasło:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" id="inputOldPwd" placeholder="Stare hasło" type=password name="old-password" required="true">
+                    <input class="form-control" id="inputOldPwd" placeholder="Stare hasło" type=password  required="true">
                 </div>
             </div>
-            <div class="form-group">
+            <div id="div-new1" class="form-group">
                 <label for="inputNewPwd1" class="col-sm-3 control-label">Nowe hasło:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" id="inputNewPwd1" placeholder="Nowe hasło" type=password name="new-password" required="true">
+                    <input class="form-control" id="inputNewPwd1" placeholder="Nowe hasło" type=password  required="true">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputNewPwd2" class="col-sm-3 control-label">Powtórz nowe:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" id="inputNewPwd2" placeholder="Powtórz nowe" type=password  name="new-rep-password" required="true">
+                    <input class="form-control" id="inputNewPwd2" placeholder="Powtórz nowe" type=password   required="true">
                 </div>
             </div>
+            <input type="hidden" id='hidden_pwd1' name="old-password" >
+            <input type="hidden" id='hidden_pwd2' name="new-password" >
+            <input type="hidden" id='hidden_pwd3' name="new-rep-password" >
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <input class="btn btn-primary btn-sm" type=submit value="Zmień hasło">
@@ -107,6 +112,29 @@ createMenu();
     </div>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.5.0/js/md5.min.js"></script>
+<script type="text/javascript">
+    function onSubmit(){
+        var ret = true;
+        try {
+            var oldPwd = $('#inputOldPwd').val();
+            var newPwd1 = $('#inputNewPwd1').val();
+            var newPwd2 = $('#inputNewPwd2').val();
+            if(newPwd1.length < 5 ) {
+                throw "tooShort";
+            }
+            $('#hidden_pwd1').val(md5(oldPwd));
+            $('#hidden_pwd2').val(md5(newPwd1));
+            $('#hidden_pwd3').val(md5(newPwd2));
+        } catch(exc) {
+            ret = false;
+            document.getElementById("div-new1").className += " has-error";
+        }
+
+        return ret;
+    }
+</script>
+
 <?php createFooter(); ?>
 </body>
 </html>

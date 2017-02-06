@@ -7,7 +7,12 @@ $dbpass = 'testnt123';
 $dbhost = 'localhost';
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 if (mysqli_connect_errno()) {
-    echo "Blad polaczenia z baza danych: " . mysqli_connect_error();
+    echo "
+            <div style='margin-top: 100px; text-align: center' class=\"alert alert-danger \">
+            
+            <strong>Database Error</strong>  Problem z połączeniem z bazą danych
+            </div>
+        ";
 }
 mysqli_query($connection, "set names 'utf8' collate 'utf8_unicode_ci'");
 

@@ -23,12 +23,17 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
     foreach($_POST as $key=>$value) {
         $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
     }
+    $_POST['username'] = strip_tags($_POST['username']);
+    if($_POST['username'] == null) {
+        header("Location: /~kokurd/admin/add_user.php?success=bad_username");
+        exit;
+    }
     // Start transakcji
+    mysqli_autocommit(getConnection(),FALSE);
     if(checkIfLoginExists($_POST['username'])) {
         header("Location: /~kokurd/admin/add_user.php?success=user_already_exists");
         exit;
     }
-    mysqli_autocommit(getConnection(),FALSE);
     $password = substr(hash('sha512',rand()),0,10);
     $passwordHashed = md5($password);
     mysqli_query(getConnection(), "insert into user(username, hashed_pwd, pr_id) values
@@ -64,6 +69,24 @@ createMenu();
             <div class=\"alert alert-success alert-dismissable\">
             <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
             <strong>Sukces</strong> Dodano nowego użytkownika
+            </div>
+
+        ";
+    }
+    if(isset($_GET['success']) && $_GET['success'] == 'user_already_exists' ) {
+        echo "
+            <div class=\"alert alert-danger alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Error</strong> Użytkownik o podanym loginie już istnieje
+            </div>
+
+        ";
+    }
+    if(isset($_GET['success']) && $_GET['success'] == 'bad_username' ) {
+        echo "
+            <div class=\"alert alert-danger alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Error</strong> Błędny login
             </div>
 
         ";

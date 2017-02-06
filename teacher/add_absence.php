@@ -6,7 +6,7 @@ include "../login_utils.php";
 include "../protected/menu.php";
 include_once "../school_db_utils.php";
 
-createHead();
+
 if(!checkIfLogged()) {
     header("Location: /~kokurd/");
 }
@@ -17,6 +17,8 @@ if(isset($_POST['course-id']) && isset($_POST['student-id']) && isset($_POST['ab
     foreach ($_POST as $key=>$value) {
         $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
     }
+    $_POST['comment'] = strip_tags($_POST['comment']);
+    mysqli_autocommit(getConnection(), false);
     $courses = getTeacherActiveCourses(getPersonId(getUserId()));
     $isCrOk = false;
     while($cr = mysqli_fetch_assoc($courses)) {
@@ -41,16 +43,18 @@ if(isset($_POST['course-id']) && isset($_POST['student-id']) && isset($_POST['ab
         $_POST['abs-id-type'].", '".
         $comment."')");
     if(mysqli_errno(getConnection())) {
+        mysqli_rollback(getConnection());
         header("Location: /~kokurd/teacher/add_absence.php?success=false");
         exit;
     } else {
+        mysqli_commit(getConnection());
         header("Location: /~kokurd/teacher/add_absence.php?success=true");
         exit;
     }
     
 }
 
-
+createHead();
 createMenu(); ?>
 
 <br>

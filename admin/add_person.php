@@ -13,9 +13,6 @@ if(!checkUserRole(getUserRole())) {
     header("Location: ".getIndexPath(getUserRole()));
 }
 
-
-
-
 // DODANIE UZYTKOWNIKA DO BAZY
 // TRANSAKCJA
 
@@ -24,6 +21,12 @@ if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['pesel']) &
     foreach($_POST as $key=>$value) {
         if($key != 'children')
             $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
+            $_POST[$key] = strip_tags($_POST[$key]);
+    }
+    if($_POST['name'] == null || $_POST['surname'] == null || $_POST['pesel'] ==null
+    || $_POST['mail'] == null) {
+        header("Location: add_person.php?success=bad_data");
+        exit;
     }
     $is_teacher = 'f';
     $is_student = 'f';
@@ -34,32 +37,41 @@ if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['pesel']) &
         $is_student = 't';
     if(isset($_POST['parent']) && $_POST['parent'] == 'true')
         $is_parent = 't';
-    if(!mysqli_query(getConnection(), "CALL proc_dodaj_osobe('"
-        .$_POST['name']."', '"
-        .$_POST['surname']."','"
-        .$_POST['pesel']."', '"
-        .$_POST['mail']."', '"
-        .$_POST['phone-nr']."', '"
-        .$is_teacher."', '"
-        .$is_student."', '"
-        .$is_parent."',@id);")) {
-        ;
-    }
-    $id_res = mysqli_fetch_assoc(mysqli_query(getConnection(), "Select @id"));
-    $id=$id_res['@id'];
+    try {
+        mysqli_autocommit(getConnection(),false);
+        if(!mysqli_query(getConnection(), "CALL proc_dodaj_osobe('"
+            .$_POST['name']."', '"
+            .$_POST['surname']."','"
+            .$_POST['pesel']."', '"
+            .$_POST['mail']."', '"
+            .$_POST['phone-nr']."', '"
+            .$is_teacher."', '"
+            .$is_student."', '"
+            .$is_parent."',@id);")) {
+                if(mysqli_error(getConnection()) == 'PeselExists')
+                    throw new Exception('PeselExists');
+        }
+        $id_res = mysqli_fetch_assoc(mysqli_query(getConnection(), "Select @id"));
+        $id=$id_res['@id'];
 
 
-    if($is_parent == 't'){
-        if(isset($_POST['children'])){
-            foreach($_POST['children'] as $child){
-                mysqli_query(getConnection(), "insert into parent_student(parent_id, student_id)
+        if($is_parent == 't'){
+            if(isset($_POST['children'])){
+                foreach($_POST['children'] as $child){
+                    mysqli_query(getConnection(), "insert into parent_student(parent_id, student_id)
                 values(".
-                    $id.", ".
-                    $child.")");
+                        $id.", ".
+                        $child.")");
+                }
             }
-       }
-
+        }
+    mysqli_commit(getConnection());
+    } catch (Exception $e) {
+        mysqli_rollback(getConnection());
+        header("Location: add_person.php?success=false");
+        exit;
     }
+
     header("Location: add_person.php?success=true");
     exit;
 }
@@ -77,6 +89,25 @@ createMenu();
 
         ";
     }
+    if(isset($_GET['success']) && $_GET['success'] == 'false' ) {
+        echo "
+                <div class=\"alert alert-warning alert-dismissable\">
+                <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                <strong>Warning</strong> Osoba z podanym peselem już istnieje
+                </div>
+    
+            ";
+    }
+    if(isset($_GET['success']) && $_GET['success'] == 'bad_data' ) {
+        echo "
+                <div class=\"alert alert-danger alert-dismissable\">
+                <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                <strong>Error</strong> Niepoprawne dane
+                </div>
+    
+            ";
+}
+
 ?>
 
     <div class="div-h-centered" style="width: 500px">

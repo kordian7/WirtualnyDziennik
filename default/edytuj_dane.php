@@ -10,15 +10,16 @@ if(!checkIfLogged()) {
     header("Location: /~kokurd/");
 }
 
-
-mysqli_autocommit(getConnection(),FALSE);
 $person = getPersonInfo(getPersonId(getUserId()));
 
 if(isset($_POST['mail']) && $_POST['mail'] != null) {
 
     foreach($_POST as $key=>$value) {
         $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
+        $_POST[$key] = strip_tags($_POST[$key]);
     }
+    mysqli_autocommit(getConnection(),FALSE);
+    $person = getPersonInfo(getPersonId(getUserId()));
 
     if($_POST['mail'] != $person['mail']) {
         mysqli_query(getConnection(),"update person set mail = '"

@@ -20,7 +20,7 @@ foreach ($_POST as $key=>$value) {
 
 if(isset($_POST['username'])) {
     $query = mysqli_query(getConnection(), "SELECT count(*) cnt, us_id 
-	FROM user where username = '{$_POST['username']}' and hashed_pwd = '".md5($_POST['password'])."';");
+	FROM user where username = '{$_POST['username']}' and hashed_pwd = '".$_POST['hashed_pwd']."';");
     $checkuser = mysqli_fetch_assoc($query);
 
     $user_role_result = mysqli_query(getConnection(), "select role_id, role from v_user_role where us_id = {$checkuser['us_id']};");
@@ -97,7 +97,7 @@ if($_GET['access'] == 'denied') {
         </div>
 
 
-        <form class="form-horizontal" action="login.php" method=post>
+        <form id='form-id' class="form-horizontal" action="login.php" method=post onsubmit="onSubmit();">
             <div  class="form-group">
                 <label for="inputLogin" class="col-sm-3 control-label">Login:</label>
                 <div class="col-sm-9">
@@ -107,9 +107,10 @@ if($_GET['access'] == 'denied') {
             <div  class="form-group">
                 <label for="inputPassword" class="col-sm-3 control-label">Hasło:</label>
                 <div class="col-sm-9">
-                    <input class="form-control" id="inputLogin" type=password name="password"  placeholder="Hasło"  required="true">
+                    <input class="form-control" id="inputPassword" type=password  placeholder="Hasło"  required="true">
                 </div>
             </div>
+            <input type="hidden" id='hidden_pwd' name='hashed_pwd' >
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
                     <input class="btn btn-primary btn-sm" type=submit value="Zaloguj">
@@ -117,6 +118,14 @@ if($_GET['access'] == 'denied') {
             </div>
 	</form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.5.0/js/md5.min.js"></script>
+    <script type="text/javascript">
+        function onSubmit(){
+            var password = $('#inputPassword').val();
+            $('#hidden_pwd').val(md5(password));
+            $("form-id").children('#inputPassword').remove();
+        }
+    </script>
 <?php createFooter(); ?>
 </body>
 </html>
