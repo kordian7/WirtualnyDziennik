@@ -15,9 +15,15 @@ createPublicMenu();
 
 <body>
 <div class="main" ></div>
-<div class="div-h-centered" style="width: width: 100%">
-    <div class="page-header" style="text-align: center">
-        <h1 style="font-size: 28px">Strona główna</h1>
+<div class='main'>
+    <div class="div-h-centered" style="width: 80%">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 28px">Strona główna</h1>
+        </div>
+        <span>
+            Witaj w naszej aplikacji.<br> Aktualnie nie jesteś zalogowany. Aby
+            móc pracować w serwisie zaloguj się.
+        </span>
     </div>
 </div>
 

@@ -12,13 +12,21 @@ if(checkIfLogged()) {
 
 <body>
 <div class='main'>
-    <div class="div-h-centered" style="width: width: 100%">
+    <div class="div-h-centered" style="width: width: 60%">
     <div style="text-align: center; font-size: 20px; ">
         <h1 style="text-align: center; font-size: 28px; ">
             Kontakt
         </h1>
     </div>
-
+        <span>
+            <br>
+            Tu znajduje się informacja o sposobie kontaktu<br>
+            <br>
+            Jan Kowalski
+            <br>
+            Nr. telefonu: 123456789 <br>
+            Godziny pracy: pn-pt 10:00-16:00
+        </span>
 
 </div>
 </div>

@@ -48,9 +48,9 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
     // Sprawdzanie czy jest person jeśli tak to ustawianie ról
     ustawRole($user_id, $_POST['person']);
     $person_arr = getPersonInfo($_POST['person']);
-    mail($person_arr['mail'], "Witaj w Wirtualnym Dzienniku", "Twoje konto zostało dodane w serwisie Wirtualny Dziennik.\nTwoje dane do zalogowania:\nLogin: ".$oldUsername."\nHasło: ".$password."\n\nZmień hasło przy pierwszej wizycie!.");
 
     mysqli_commit(getConnection());
+    mail($person_arr['mail'], "Witaj w Wirtualnym Dzienniku", "Twoje konto zostało dodane w serwisie Wirtualny Dziennik.\nTwoje dane do zalogowania:\nLogin: ".$oldUsername."\nHasło: ".$password."\n\nZmień hasło przy pierwszej wizycie!.");
 
     header("Location: /~kokurd/admin/add_user.php?success=true");
     exit;
@@ -108,7 +108,7 @@ createMenu();
         <div class="form-group">
             <label for="Osoba" class="col-sm-3 control-label">Osoba:</label>
             <div class="col-sm-9">
-                <select class="chosen-select" data-placeholder="Wybierz użytkownika" name="person" >
+                <select class="chosen-select" data-placeholder="Wybierz użytkownika" name="person" required="true">
                         <br>
                         <option> </option>
 

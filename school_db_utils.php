@@ -87,4 +87,19 @@ function getCourseAbsences($cour_id) {
     return $cour_abs;
 }
 
+function getActiveClasses() {
+     $q = mysqli_query(getConnection(), "select class_id, section, year_started, year from class
+     where active ='T'");
+     return $q;
+}
+
+function getCourseTypes() {
+    $q = mysqli_query(getConnection(), "select cour_tp_id, course_name from course_type");
+    return $q;
+}
+
+function getCourseAvailStudents($cr_id) {
+
+}
+
 ?>

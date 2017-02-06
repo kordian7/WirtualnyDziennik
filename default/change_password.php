@@ -34,6 +34,8 @@ if(isset($_POST['old-password']) && $_POST['old-password'] != null
             ."' where us_id = "
             .$user['us_id']
             .";");
+        mysqli_query(getConnection(), "insert into user_logs(ip, us_username, type, value ) values 
+        ( '{$_SERVER['REMOTE_ADDR']}', '{$user['username']}', 'password_change', '".$user['hashed_pwd']."');");
     }
     mysqli_commit(getConnection());
     header("Location: /~kokurd/default/change_password.php?success=true");

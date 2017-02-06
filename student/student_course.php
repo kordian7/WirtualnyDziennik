@@ -21,16 +21,16 @@ if(isset($_POST['cour_id']) && $_POST['cour_id']!=null) {
         echo "
         <table class='table table-striped'>
         <tr>
-            <th>Nazwa</th>
-            <th>Ocena</th>
-            <th>Komentarz</th>
+            <th style='text-align: center'>Nazwa</th>
+            <th style='text-align: center'>Ocena</th>
+            <th style='text-align: center'>Komentarz</th>
         </tr>";
 
         $marks = getStudentMarksFromCourse(getPersonId(getUserId()), $cr_id);
         if (mysqli_num_rows($marks) == 0) {
             echo "
         <tr>
-        <td>Brak ocen</td><td>-</td><td>-</td>
+        <td>-</td><td>-</td><td>-</td>
         </tr>
         ";
         } else {

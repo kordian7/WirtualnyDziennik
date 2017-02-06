@@ -82,6 +82,11 @@ function getStudents() {
     return $students_result;
 }
 
+function getTeachers() {
+    $q = mysqli_query(getConnection(), "select t_id, name, surname, pesel from v_teacher;");
+    return $q;
+}
+
 function getPersonId($us_id) {
     $person_result = mysqli_fetch_assoc(mysqli_query(getConnection(), "select pr_id from user where us_id = ".$us_id.";"));
     $pr_id = $person_result['pr_id'];
@@ -147,6 +152,12 @@ function getParentChildren($pr_id) {
      where parent_id = "
     .$pr_id);
     return $parChildren;
+}
+
+function getUsersWithoutAdms() {
+    $q = mysqli_query(getConnection(), "select us_id, username, role from v_user_role
+    where role != 'admin' or role is null");
+    return $q;
 }
 
 
