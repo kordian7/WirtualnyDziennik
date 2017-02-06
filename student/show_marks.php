@@ -38,7 +38,7 @@ createMenu();
 <div class='main'>
 Oceny z przedmiotu: <?php echo $cr_name;?>
 <br>
-<table>
+<table class="table table-striped">
     <th>
         <td>Nazwa</td>
         <td>Ocena</td>

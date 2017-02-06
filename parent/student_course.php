@@ -19,7 +19,7 @@ if(isset($_POST['cour_id']) && $_POST['cour_id']!=null
     ";
 
         echo "
-        <table class='table'>
+        <table class='table table-striped'>
         <tr>
             <th>Nazwa</th>
             <th>Ocena</th>
@@ -30,7 +30,7 @@ if(isset($_POST['cour_id']) && $_POST['cour_id']!=null
         if (mysqli_num_rows($marks) == 0) {
             echo "
         <tr>
-        <td>Brak ocen</td><td>-</td><td>-</td>
+        <td>-</td><td>-</td><td>-</td>
         </tr>
         ";
         } else {

@@ -19,7 +19,7 @@ if(isset($_POST['cour_id']) && $_POST['cour_id']!=null) {
     }
     if ($cr_ok) {
         echo "
-        <table class='table'>
+        <table class='table table-striped'>
         <tr>
             <th>Nazwa</th>
             <th>Ocena</th>

@@ -25,7 +25,7 @@ function getTeacherActiveCourses($t_id) {
 
 function getCourseStudents($c_id) {
     $st = mysqli_query(getConnection(),
-        "select st_id, name, surname from v_student_course WHERE course_id =".
+        "select st_id, name, surname, pesel from v_student_course WHERE course_id =".
         $c_id);
     return $st;
 }
@@ -65,6 +65,26 @@ function getCourseInfo($cr_id) {
         from v_course where cour_id = "
         .$cr_id);
     return mysqli_fetch_assoc($qr);
+}
+
+function getAbsenceTypes() {
+    $ex = mysqli_query(getConnection(),
+        "select ab_id, type from absence_type");
+    return $ex;
+}
+
+function getStudentAbsences($st_id) {
+     $st_abs = mysqli_query(getConnection(), "select st_id, name, surname, pesel,
+     cour_id, course_name, type, absence_date, comment from v_absence where st_id="
+    .$st_id);
+     return $st_abs;
+}
+
+function getCourseAbsences($cour_id) {
+    $cour_abs = mysqli_query(getConnection(), "select st_id, name, surname, pesel,
+     cour_id, course_name, type, absence_date, comment from v_absence where cour_id="
+        .$cour_id);
+    return $cour_abs;
 }
 
 ?>

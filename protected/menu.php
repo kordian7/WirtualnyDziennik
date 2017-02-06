@@ -152,17 +152,18 @@ function createSideMenuContent($m_role) {
         case "teacher":
             return "
             <a href=\"/~kokurd/teacher/add_marks.php\">Dodaj oceny</a>
-            <a href=\"#\">Adm 2</a>
+            <a href=\"/~kokurd/teacher/add_absence.php\">Dodaj nieobecność</a>
+            <a href=\"/~kokurd/teacher/show_absences.php\">Sprawdź nieobecności</a>
             ";
         case "student":
             return "
             <a href=\"/~kokurd/student/show_courses.php\">Pokaż przedmioty</a>
-            <a href=\"#\">Adm 2</a>
+            <a href=\"/~kokurd/student/show_absences.php\">Sprawdź nieobecności</a>
             ";
         case "parent":
             return "
             <a href=\"/~kokurd/parent/show_courses.php\">Pokaż oceny</a>
-            <a href=\"#\">Adm 2</a>
+            <a href=\"/~kokurd/parent/show_absences.php\">Sprawdź nieobecności</a>
             ";
         default:
             return "";
@@ -178,9 +179,11 @@ function createHead() {
 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8_polish_ci\" />  
 <title>Wirtualny dziennik</title>
       <script src=\"/~kokurd/js/jquery-3.1.1.min.js\" type='text/javascript'></script>
+      <script src=\"/~kokurd/js/jquery-ui-1.12.1/jquery-ui.js\" type='text/javascript'></script>
 
 <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
 <link rel='stylesheet' href='/~kokurd/css/awesome-bootstrap-checkbox.css' type='text/css' />
+<link rel='stylesheet' href='/~kokurd/js/jquery-ui-1.12.1/jquery-ui.css' type='text/css' />
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
          <script src=\"http://harvesthq.github.io/chosen/chosen.jquery.js\"></script>
      <script src=\"/~kokurd/js/scripts.js\" type='text/javascript'></script>
@@ -195,9 +198,10 @@ function createHead() {
      <link rel='stylesheet' href='/~kokurd/css/chosen.css' type='text/css' />
 <link rel='stylesheet' href='/~kokurd/css/wd.css' type='text/css' />
 <noscript>
-    <div class='noscript-div' style>
-        Twoja przeglądarka nie obsługuje JavaScriptu
-    </div>
+            <div style='margin-top: 100px' class=\"alert alert-danger \">
+    < strong> Error </strong > Twoja strona nie obsługuje JavaScriptu. Serwis może nie działać poprawnie.
+    </div >
+
 </noscript>
 </head> 
 ";

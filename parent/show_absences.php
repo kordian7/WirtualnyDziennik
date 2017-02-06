@@ -6,6 +6,7 @@ include_once "../login_utils.php";
 include_once "../protected/menu.php";
 include_once "../school_db_utils.php";
 include_once "course_list.php";
+include_once "student_absences.php";
 
 createHead();
 if(!checkIfLogged()) {
@@ -34,15 +35,12 @@ createMenu(); ?>
                 Sprawdź oceny
             </h1>
         </div>
-<table class="table">
-    <tr>
-        <td>
     <?php
     $childId = null;
     if(mysqli_num_rows($parChildren) == 1) {
         echo "Twoje dziecko: <br>".$child['st_name']." ".$child['st_surname'];
     } elseif(mysqli_num_rows($parChildren) > 1) {
-        echo "Wybierz dziecko, którego oceny chcesz obejrzeć: <br>
+        echo "Wybierz dziecko, którego nieobecności chcesz obejrzeć: <br>
     <select id='select-student' class='chosen-select' data-placeholder='Wybierz ucznia: ' id='id-studenta' >
         <br>
         <option> </option>";
@@ -57,33 +55,21 @@ createMenu(); ?>
     }
 
     ?>
-        </td><td>
-Lista przedmiotów:
-<br>
-
-
-    Przedmiot: <select id="select-course" class="chosen-select" data-placeholder="Wybierz kurs: " id="id-kursu" >
-                <?php
-                if(mysqli_num_rows($parChildren) == 1) {
-                    printCourseList($child['st_id']);
-                }
-                ?>
-
-        </select>
-        </td>
-    </tr>
-</table>
 
         <div id="student-tab-containter" style="padding-top: 20px">
-
+            <?php
+            if(mysqli_num_rows($parChildren) == 1) {
+                printStudentAbsences($child['st_id']);
+            }
+            ?>
         </div>
+
     </div>
 
 </div>
 <?php createFooter(); ?>
 
 <script type="text/javascript">
-    var $select2 = $('#select-course');
     <?php
     if(mysqli_num_rows($parChildren) > 1) {
         echo "
@@ -94,23 +80,18 @@ Lista przedmiotów:
         \$select1.on({
         'change' : function() {
             var selectVal = $(this).find('option:selected').val();
-            var hidden1 = $('#hidden-st-id');
-            hidden1.val(selectVal);
-            console.log(hidden1.val());
             if(selectVal != -1) {
-                console.log( \"test\");
+                console.log( selectVal);
                 $.ajax({
                     type: \"POST\",
-                    url: \"/~kokurd/parent/course_list.php\",
+                    url: \"/~kokurd/parent/student_absences.php\",
                     data: {
                     st_id: selectVal
                     },
                     success: function(tabela) {
                     console.log( \"Otrzymane dane: \" + tabela );
-                    \$select2.prop('disabled', 0);
-                    $('#select-course').empty();
-                    $('#select-course').append(tabela);
-                    $('#select-course').trigger(\"chosen:updated\");
+                    $('#student-tab-containter').empty();
+                    $('#student-tab-containter').append(tabela);
 
                 },
                     error: function() {
@@ -123,7 +104,6 @@ Lista przedmiotów:
     });
 
     \$select1.val(-1);
-    \$select2.prop('disabled', 1);
     ";
 
     }
@@ -131,32 +111,6 @@ Lista przedmiotów:
 
     ?>
 
-    $select2.on({
-        'change' : function() {
-            var selectVal2 = $(this).find('option:selected').val();
-            if(selectVal2 != -1) {
-                $.ajax({
-                    type: "POST",
-                    url: "/~kokurd/parent/student_course.php",
-                    data: {
-                        cour_id: selectVal2,
-                        st_id: $('#hidden-st-id').val()
-
-                    },
-                    success: function(tabela) {
-                        console.log( "Otrzymane dane: " + tabela );
-                        $('#student-tab-containter').empty();
-                        $('#student-tab-containter').append(tabela);
-
-                    },
-                    error: function() {
-                        console.log( "Błąd połączenia");
-                    }
-                })
-
-            }
-        }
-    });
 
 
 

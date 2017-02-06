@@ -16,7 +16,7 @@ if(!checkUserRole(getUserRole())) {
 createMenu(); ?>
 <br>
 <div class='main'>
-    <div class="div-h-centered" style="width: 800px">
+    <div class="div-h-centered" style="max-width: 800px; width: 90%">
         <div style="font-size: 20px;  padding-bottom: 20px">
             <h1>
                 Sprawdź oceny
