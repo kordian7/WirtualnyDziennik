@@ -28,6 +28,12 @@ createMenu(); ?>
                 echo $childId;
             }
         ?>" >
+    <div class="div-centered" style="padding-right: 30px; top: 28%; width: 800px">
+        <div style="text-align: center; font-size: 20px; padding-top: 20px; padding-bottom: 20px">
+            <h1>
+                Sprawdź oceny
+            </h1>
+        </div>
 <table class="table">
     <tr>
         <td>
@@ -67,11 +73,10 @@ Lista przedmiotów:
         </td>
     </tr>
 </table>
-
-        <div id="student-tab-containter">
+    </div>
+        <div id="student-tab-containter" style="padding-top: 250px">
 
         </div>
-
 </div>
 <?php createFooter(); ?>
 

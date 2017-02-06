@@ -59,14 +59,13 @@ createMenu();
     }
 ?>
 
-    <div class="div-centered" style="width:500px; top:45%">
+    <div class="div-h-centered" style="width: 500px">
         <div class="page-header" style="text-align: center">
             <h1 style="font-size: 28px">Edycja danych</h1>
         </div>
 
 
     <form class="form-horizontal" action="edytuj_dane.php" method=POST onsubmit="return validateForm()">
-        <table class="form-table">
             <div class="form-group">
                 <label for="inputName" class="col-sm-3 control-label">Imię:</label>
                 <div class="col-sm-9">

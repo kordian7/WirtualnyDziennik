@@ -61,17 +61,18 @@ if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
 createMenu();
 $students = getCourseStudents($_POST['course']);
 ?>
-<br>
-<div class='main'>
-    Dodaj nowy egzamin:
-    <br>
+<div class="main">
+<div class="div-h-centered" style="width: 520px">
+    <div class="page-header" style="text-align: center">
+        <h1 style="font-size: 28px">Dodaj nowy egzamin</h1>
+    </div>
 <form method="post" action="add_exam.php">
-<table>
+<table class="table">
     <input type="hidden" name="course-id" value='<?php echo $_POST['course']; ?>'>
     <tr><td>Nazwa</td>
-        <td colspan="2"><input type="text" required="true" name="exam-name"  ></td></tr>
+        <td colspan="2"><input type="text" class="form-control" required="true" name="exam-name"  ></td></tr>
     <tr><td>Komentarz</td>
-        <td colspan="2"><input type="text" name="exam-comment"  ></td></tr>
+        <td colspan="2"><input class="form-control" type="text" name="exam-comment"  ></td></tr>
         <th>Uczeń</th><th>Ocena</th><th>Komentarz</th>
     <?php
         while($st=mysqli_fetch_assoc($students)) {
@@ -81,18 +82,18 @@ $students = getCourseStudents($_POST['course']);
                   ".getNewMarksOptions()."
             </select></td>
             <td>
-                <input type='text' name='st-com-".$st['st_id']."'>
+                <input class=\"form-control\" type='text' name='st-com-".$st['st_id']."'>
             </td>
             </tr>";
         }
         ?>
-    <tr><td colspan="2"> <a class="btn btn-primary btn-sm"  href="/~kokurd/teacher/add_marks.php?course_id=<?php
-                echo $_POST['course']; ?>">Anuluj</a></td>
-    </tr>
-    <tr><td colspan="2"><input class="btn btn-primary btn-sm" type="submit" value="Dodaj egzamin"> </td></tr>
+    <tr><td colspan="3">
+            <input style="float: right; margin-left: 20px" class="btn btn-primary btn-sm" type="submit" value="Dodaj egzamin">
+            <a style="float: right; margin-left: 20px" class="btn btn-primary btn-sm"  href="/~kokurd/teacher/add_marks.php?course_id=<?php
+                echo $_POST['course']; ?>">Anuluj</a> </td></tr>
 </table>
 </form>
-
+</div>
 </div>
 <?php createFooter(); ?>
 </body>

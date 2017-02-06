@@ -12,7 +12,7 @@ if(!checkIfLogged()) {
 if(!checkUserRole(getUserRole())) {
     header("Location: ".getIndexPath(getUserRole()));
 }
-createMenu();
+
 
 // DODANIE UZYTKOWNIKA DO BAZY
 // TRANSAKCJA
@@ -52,22 +52,26 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
 
 
 }
-
+createMenu();
 ?>
 <br>
 <div class='main'>
-<?php
+
+
+    <?php
     if(isset($_GET['success']) && $_GET['success'] == 'true' ) {
         echo "
-            <div class='success'>
-                Dodano nowego użytkownika
+            <div class=\"alert alert-success alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Sukces</strong> Dodano nowego użytkownika
             </div>
+
         ";
     }
-?>
+    ?>
 
 
-    <div class="div-centered" style="width:500px ; top: 30%">
+    <div class="div-h-centered" style="width: 500px">
         <div class="page-header" style="text-align: center">
             <h1 style="font-size: 28px">Dodawanie nowego użytkownika</h1>
         </div>

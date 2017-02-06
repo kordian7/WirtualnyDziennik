@@ -16,8 +16,12 @@ if(!checkUserRole(getUserRole())) {
 createMenu(); ?>
 <br>
 <div class='main'>
-Lista Twoich obecnych przedmiotów:
-<br>
+    <div class="div-h-centered" style="width: 800px">
+        <div style="font-size: 20px;  padding-bottom: 20px">
+            <h1>
+                Sprawdź oceny
+            </h1>
+        </div>
 
     Osoba: <select id="select-course" class="chosen-select" data-placeholder="Wybierz kurs: " id="id-kursu" >
         <br>
@@ -30,10 +34,11 @@ Lista Twoich obecnych przedmiotów:
                     <br>
                     <option value={$cr['course_id']}  > {$cr['course_name']} </option>
                 ";
-        }
-        echo "</select>"; ?>
+        } ?>
+        </select>
+        <div id="student-course-tab-containter" style="padding-top: 20px">
 
-        <div id="student-course-tab-containter">
+        </div>
 
         </div>
 </div>

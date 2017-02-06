@@ -36,10 +36,21 @@ createMenu(); ?>
 
 <br>
 <div class='main'>
-Lista prowadzonych kursów przez Ciebie:
-<br>
 
-    Osoba: <select id="select-course" class="chosen-select" data-placeholder="Wybierz kurs: " id="id-kursu" >
+    <div class="div-h-centered" style="width: 500px">
+        <div style="text-align: center; font-size: 20px; ">
+            <h1>
+                Oceny
+            </h1>
+        </div>
+    <div style="padding-bottom: 12px">
+    <span >Lista prowadzonych kursów przez Ciebie:</span>
+    </div>
+
+   <span style="padding-right: 10px;  f   display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;">Przedmiot:</span>  <select id="select-course" class="chosen-select" data-placeholder="Wybierz kurs: " id="id-kursu" >
             <br>
             <option> </option>
 
@@ -52,7 +63,8 @@ Lista prowadzonych kursów przez Ciebie:
                 ";
     }
     echo "</select>"; ?>
-    <div id="teacher-course-tab-containter">
+    </div>
+    <div id="teacher-course-tab-containter" style="padding-top: 25px">
         <?php
         if(isset($_GET['course_id'])) {
             $cour = mysqli_escape_string(getConnection(), $_GET['course_id']);

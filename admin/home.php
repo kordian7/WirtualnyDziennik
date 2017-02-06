@@ -12,22 +12,16 @@ if(!checkIfLogged()) {
 if(!checkUserRole(getUserRole())) {
     header("Location: ".getIndexPath(getUserRole()));
 }
-createMenu();
-echo "<br>
+createMenu(); ?>
+
 <div class='main'>
-Administrator
-Witaj na stronie glownej
-<br> 
-Zalogowany uzytkownik o ID: ".getUserId()."
+    <div class="div-h-centered" style="width: 520px">
+    <div class="page-header" style="text-align: center">
+        <h1 style="font-size: 28px">Strona główna</h1>
+    </div>
 
-";
-
-foreach($_SERVER as $key=>$value) {
-    echo "<br/>".$key." : ".$value;
-}
-echo "</div>";
-?>
-
+</div>
+</div>
 <?php createFooter(); ?>
 </body>
 </html>

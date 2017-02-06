@@ -14,17 +14,15 @@ if(checkIfLogged()) {
 
 <body>
 <div class='main'>
-About us
-<br>
-<?php
-if(checkIfLogged()) {
-    //header("Location: ".getIndexPath(getUserRole()));
-    echo getIndexPath(getUserRole())." <br/>".getUserRole()."::";
-}
-?>
+    <div class="div-h-centered" style="width: 100%">
+    <div style="text-align: center;  ">
+        <h1 style="text-align: center; font-size: 28px; ">
+            Informacje o stronie
+        </h1>
+    </div>
 
 
-
+</div>
 </div>
 <?php createFooter(); ?>
 </body>

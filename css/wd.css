@@ -3,9 +3,11 @@ body {
 }
 
 .main {
-    margin-top: 60px;
+    margin-top: 90px;
     margin-left: 8px;
 }
+
+
 
 .noscript-div {
     margin-top: 60px;
@@ -21,6 +23,9 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #cce6ff;
 }
 
 .topmenu li {
@@ -73,10 +78,10 @@ body {
 
 .sidemenu {
     height: 100%;
-    width: 200px;
+    width: 0px;
     position: fixed;
     z-index: 1;
-    top: 60px;
+    top: 51px;
     left: 0;
     background-color: #004080;
     overflow-x: hidden;
@@ -117,4 +122,23 @@ body {
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
+}
+
+.div-h-centered {
+    text-align: center; margin: auto
+}
+
+
+
+
+@media screen and (max-width:850px) {
+    .main {
+        margin-top: 120px;
+    }
+    .sidemenu {
+        top: 96px;
+    }
+    .topmenu-div ul {
+        height: 96px;
+    }
 }

@@ -10,18 +10,17 @@ if(checkIfLogged()) {
 }
 ?>
 
-<body>  
-Kontakt
-<br>
+<body>
 <div class='main'>
-<?php
-if(checkIfLogged()) {
-    echo getIndexPath(getUserRole())." <br/>".getUserRole()."::";
-}
-?>
+    <div class="div-h-centered" style="width: width: 100%">
+    <div style="text-align: center; font-size: 20px; ">
+        <h1 style="text-align: center; font-size: 28px; ">
+            Kontakt
+        </h1>
+    </div>
 
 
-
+</div>
 </div>
 <?php createFooter(); ?>
 </body>

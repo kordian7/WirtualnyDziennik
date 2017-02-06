@@ -10,19 +10,14 @@
 include "loginUtils.php";
 include "protected/menu.php";
 createMenu($session_arr['ses_us_id']);
-
-echo "
-<div class='main' /> <br>
-Witaj na stronie glownej
-<br> 
-Zalogowany uzytkownik o ID: ".$checkuser['ses_us_id'];
-
-foreach($_SERVER as $key=>$value) {
-    echo "<br/>".$key." : ".$value;
-}
-
 ?>
+<div class='main' >
+<div class="div-centered" style="width:520px; top:120px">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 20px">Strona główna</h1>
+        </div>
+    </div>
 
-
+</div>
 </body>
 </html>

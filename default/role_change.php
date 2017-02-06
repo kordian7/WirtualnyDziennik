@@ -36,26 +36,50 @@ if(isset($_POST['role'])) {
 
 createHead();
 
-createMenu();
-echo "<br>
+
+echo "<body>";
+createMenu(); ?>
+<br>
 <div class='main'>
-<form method='post' submit='/~kokurd/default/role_change.php'>";
+
+    <div class="div-h-centered" style="width: 500px">
+        <div class="page-header" style="text-align: center">
+            <h1 style="font-size: 28px">Zmiana funkcji</h1>
+        </div>
+        <form class="form-horizontal" role='form' method='post' submit='/~kokurd/default/role_change.php'>
+
+    <?php
 $user_roles = getAvailableRoles();
 if($_GET['selection'] == 'error') {
-    echo '<div style="padding-bottom:15px">
-		Problem z wybrana wartoscia
-		</div> <br>';
+    echo "
+            <div class=\"alert alert-danger alert-dismissable\">
+            <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+            <strong>Error</strong> Problem z wybraną wartością
+            </div>
+
+        ";
 }
 foreach($user_roles as $k => $role){
-    echo "<input type='radio' name='role' required='true' value='".$k."'>".$role."<br>";
-}
-echo "
-<input  type=submit value=\"Potwierdź wybór\">
-</form>";
+    echo "
+     <div class=\"form-group\">
+                <label class=\"col-sm-3 control-label\">".$role."</label>
+                <div class=\"col-sm-9\">
+                    <input class=\"form-control\" type='radio' name='role' required='true' value='".$k."'>
+                </div>
+            </div>
+    
+    
+    <br>";
+} ?>
 
-echo "</div>";
-?>
-
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input class="btn btn-primary btn-sm" type=submit value="Potwierdź wybór">
+                </div>
+            </div>
+        </form>
+</div>
+</div>
 <?php createFooter(); ?>
 </body>
 </html>

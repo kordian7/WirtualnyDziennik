@@ -91,7 +91,7 @@ if($_GET['access'] == 'denied') {
 ?>
 
 
-    <div class="div-login" style="width:500px">
+    <div class="div-h-centered" style="width: 500px">
         <div class="page-header" style="text-align: center">
             <h1 style="font-size: 28px">Logowanie</h1>
         </div>

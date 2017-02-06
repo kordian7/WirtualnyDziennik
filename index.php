@@ -15,14 +15,11 @@ createPublicMenu();
 
 <body>
 <div class="main" ></div>
-Strona głowna
-<br>
-<?php
-if(checkIfLogged()) {
-    //header("Location: ".getIndexPath(getUserRole()));
-    echo getIndexPath(getUserRole())." <br/>".getUserRole()."::";
-}
-?>
+<div class="div-h-centered" style="width: width: 100%">
+    <div class="page-header" style="text-align: center">
+        <h1 style="font-size: 28px">Strona główna</h1>
+    </div>
+</div>
 
 
 

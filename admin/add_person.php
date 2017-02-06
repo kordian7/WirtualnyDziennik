@@ -79,7 +79,7 @@ createMenu();
     }
 ?>
 
-    <div class="div-centered" style="width:500px; top:45%">
+    <div class="div-h-centered" style="width: 500px">
         <div class="page-header" style="text-align: center">
             <h1 style="font-size: 28px">Dodawanie nowej osoby</h1>
         </div>

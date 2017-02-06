@@ -32,8 +32,18 @@ function createMenu() {
             break;
     }
     echo "
+<style>
+
+
+}
+
+
+
+</style>
+
+<nav>
 <div class='topmenu-div'>
-    <ul class=\"topmenu\">";
+    <ul id='myTopmenu' class=\"topmenu\">";
     if($m_role != null) {
         echo "<li> <a href='javascript:void(0)' onclick=\"toggleSideMenu()\"><span class=\"glyphicon glyphicon-menu-hamburger\" /> </a> </li>";
     }
@@ -54,13 +64,15 @@ function createMenu() {
             echo "
             </div>
         </li>
+        
+        
         <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/logout.php\"><span class=\"glyphicon glyphicon-log-out\" /> </a> </li>
           <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/kontakt.php\">Kontakt</a> </li>
         <li style='float: right; padding-right: 20px'> <a href=\"/~kokurd/about_us.php\">Informacje o stronie</a> </li>
     </ul>
-</div>";
+</div></nav>";
 if($m_role != null) {
-    echo "<div class='sidemenu'>"
+    echo "<div id='sidemenu-id' class='sidemenu'>"
         .createSideMenuContent($m_role)
         ."</div>";
 }
@@ -68,7 +80,7 @@ echo "
 <script>
     
     function setMainWidth() {
-        document.getElementsByClassName(\"main\")[0].style.marginLeft = \"208px\";
+        document.getElementsByClassName(\"main\")[0].style.marginLeft = \"8px\";
     }
     function showUserinfoMenu() {
         document.getElementById(\"myUserinfoContent\").classList.toggle(\"show-menu\");
@@ -89,18 +101,18 @@ echo "
 }
     
     function toggleSideMenu() {
-        console.log(document.getElementsByClassName('sidemenu')[0].style.width);
-        if(document.getElementsByClassName('sidemenu')[0].style.width == \"0px\") {
-        console.log(1);
+        console.log('wd: ' + $('#sidemenu-id').width());
+        if($('#sidemenu-id').width() == 0) {
+            $('#sidemenu-id').width(200);
+            $('.main').css('marginLeft','208px');
+           } else {
+            $('#sidemenu-id').width(0);
+            $('.main').css('marginLeft','8px');
         
-            document.getElementsByClassName(\"sidemenu\")[0].style.width = \"200px\";
-            document.getElementsByClassName(\"main\")[0].style.marginLeft = \"208px\";
-        } else {
-        console.log(2);
-            document.getElementsByClassName(\"sidemenu\")[0].style.width = \"0px\";
-            document.getElementsByClassName(\"main\")[0].style.marginLeft = \"8px\";
         }
     }
+
+    
     ";
     if($m_role != null) {
         echo "window.onload = setMainWidth;";
@@ -168,6 +180,7 @@ function createHead() {
       <script src=\"/~kokurd/js/jquery-3.1.1.min.js\" type='text/javascript'></script>
 
 <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">
+<link rel='stylesheet' href='/~kokurd/css/awesome-bootstrap-checkbox.css' type='text/css' />
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
          <script src=\"http://harvesthq.github.io/chosen/chosen.jquery.js\"></script>
      <script src=\"/~kokurd/js/scripts.js\" type='text/javascript'></script>

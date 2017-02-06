@@ -9,8 +9,7 @@ $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 if (mysqli_connect_errno()) {
     echo "Blad polaczenia z baza danych: " . mysqli_connect_error();
 }
-mysqli_query('set names cp1250');
-mysqli_query('set character_set cp1250_general_ci');
+mysqli_query($connection, "set names 'utf8' collate 'utf8_unicode_ci'");
 
 function getConnection() {
     global $connection;
