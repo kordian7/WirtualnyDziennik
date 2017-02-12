@@ -16,18 +16,16 @@ if(!isset($_POST['exam'])) {
     header("Location: /~kokurd/teacher/add_marks.php");
 } else {
     $_POST['exam'] = mysqli_escape_string(getConnection(), $_POST['exam']);
-    mysqli_autocommit(getConnection(), false);
+
     $examInfo = mysqli_fetch_assoc(getExamInfo($_POST['exam']));
     $ex_r_q = mysqli_query(getConnection(), "select * from exam_result where ex_id="
         . $_POST['exam']);
     if (mysqli_num_rows($ex_r_q ) > 0) {
-        mysqli_commit(getConnection());
         header("Location: /~kokurd/teacher/add_marks.php?course_id=" . $examInfo['cour_id'] . "&rm_sc=false");
         exit;
     } else {
         mysqli_query(getConnection(), "delete from exam where ex_id = "
             . $_POST['exam']);
-        mysqli_commit(getConnection());
         header("Location: /~kokurd/teacher/add_marks.php?course_id=" . $examInfo['cour_id'] . "&rm_sc=true");
         exit;
     }

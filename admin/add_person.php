@@ -13,15 +13,14 @@ if(!checkUserRole(getUserRole())) {
     header("Location: ".getIndexPath(getUserRole()));
 }
 
-// DODANIE UZYTKOWNIKA DO BAZY
 // TRANSAKCJA
-
 if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['pesel']) && isset($_POST['mail'])) {
 
     foreach($_POST as $key=>$value) {
-        if($key != 'children')
+        if($key != 'children') {
             $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
             $_POST[$key] = strip_tags($_POST[$key]);
+        }
     }
     if($_POST['name'] == null || $_POST['surname'] == null || $_POST['pesel'] ==null
     || $_POST['mail'] == null) {
@@ -39,6 +38,7 @@ if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['pesel']) &
         $is_parent = 't';
     try {
         mysqli_autocommit(getConnection(),false);
+        mysqli_query(getConnection(),"SET TRANSACTION ISOLATION LEVEL REPEATABLE READ");
         if(!mysqli_query(getConnection(), "CALL proc_dodaj_osobe('"
             .$_POST['name']."', '"
             .$_POST['surname']."','"
@@ -56,8 +56,10 @@ if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['pesel']) &
 
 
         if($is_parent == 't'){
+
             if(isset($_POST['children'])){
                 foreach($_POST['children'] as $child){
+
                     mysqli_query(getConnection(), "insert into parent_student(parent_id, student_id)
                 values(".
                         $id.", ".

@@ -32,13 +32,13 @@ createMenu(); ?>
     <div class="div-h-centered" style="max-width: 800px; width: 90%">
         <div style="text-align: center; font-size: 20px; padding-top: 20px; padding-bottom: 20px">
             <h1>
-                Sprawdź oceny
+                Sprawdź Nieobecności
             </h1>
         </div>
     <?php
     $childId = null;
     if(mysqli_num_rows($parChildren) == 1) {
-        echo "Twoje dziecko: <br>".$child['st_name']." ".$child['st_surname'];
+        echo "<h1 style='font-size: 18px;'>Twoje dziecko: <br>".$child['st_name']." ".$child['st_surname']." </h1>";
     } elseif(mysqli_num_rows($parChildren) > 1) {
         echo "Wybierz dziecko, którego nieobecności chcesz obejrzeć: <br>
     <select id='select-student' class='chosen-select' data-placeholder='Wybierz ucznia: ' id='id-studenta' >

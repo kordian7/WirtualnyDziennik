@@ -23,6 +23,7 @@ if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
     }
     $_POST['exam-comment'] = strip_tags($_POST['exam-comment']);
     mysqli_autocommit(getConnection(), false);
+    mysqli_query(getConnection(),"SET TRANSACTION ISOLATION LEVEL REPEATABLE READ");
     $students = getCourseStudents($_POST['course-id']);
     $teacher_id = getPersonId(getUserId());
     if(isset($_POST['exam-comment']) && $_POST['exam-comment'] != null) {

@@ -19,6 +19,7 @@ if(!isset($_POST['exam']) && !isset($_POST['exam-id'])) {
 // Zapis ocen do bazy
 if(isset($_POST['exam-id'])) {
     mysqli_autocommit(getConnection(), false);
+    mysqli_query(getConnection(),"SET TRANSACTION ISOLATION LEVEL REPEATABLE READ");
     $examInfo = mysqli_fetch_assoc(getExamInfo($_POST['exam-id']));
     $oldExamName = $examInfo['nazwa'];
     $oldExamComment = $examInfo['comment'];

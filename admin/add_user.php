@@ -15,7 +15,6 @@ if(!checkUserRole(getUserRole())) {
 
 
 // DODANIE UZYTKOWNIKA DO BAZY
-// TRANSAKCJA
 
 if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['person']) && $_POST['person'] != null) {
     $_POST['username'] = str_replace(' ', '', $_POST['username']);
@@ -28,8 +27,6 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
         header("Location: /~kokurd/admin/add_user.php?success=bad_username");
         exit;
     }
-    // Start transakcji
-    mysqli_autocommit(getConnection(),FALSE);
     if(checkIfLoginExists($_POST['username'])) {
         header("Location: /~kokurd/admin/add_user.php?success=user_already_exists");
         exit;
@@ -49,7 +46,6 @@ if(isset($_POST['username']) && $_POST['username'] != null && isset($_POST['pers
     ustawRole($user_id, $_POST['person']);
     $person_arr = getPersonInfo($_POST['person']);
 
-    mysqli_commit(getConnection());
     mail($person_arr['mail'], "Witaj w Wirtualnym Dzienniku", "Twoje konto zostało dodane w serwisie Wirtualny Dziennik.\nTwoje dane do zalogowania:\nLogin: ".$oldUsername."\nHasło: ".$password."\n\nZmień hasło przy pierwszej wizycie!.");
 
     header("Location: /~kokurd/admin/add_user.php?success=true");

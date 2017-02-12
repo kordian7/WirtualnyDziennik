@@ -89,7 +89,7 @@ function getCourseAbsences($cour_id) {
 
 function getActiveClasses() {
      $q = mysqli_query(getConnection(), "select class_id, section, year_started, year from class
-     where active ='T'");
+     where active ='T' order by year, section");
      return $q;
 }
 
@@ -99,7 +99,13 @@ function getCourseTypes() {
 }
 
 function getCourseAvailStudents($cr_id) {
+// TODO
+ }
 
+function getStudentsWithoutClass() {
+    $q = mysqli_query(getConnection(), "select st_id, name, surname, pesel
+    from v_student_class where cl_id is null");
+     return $q;
 }
 
 ?>

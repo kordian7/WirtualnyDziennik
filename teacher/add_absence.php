@@ -18,8 +18,7 @@ if(isset($_POST['course-id']) && isset($_POST['student-id']) && isset($_POST['ab
         $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
     }
     $_POST['comment'] = strip_tags($_POST['comment']);
-    mysqli_autocommit(getConnection(), false);
-    $courses = getTeacherActiveCourses(getPersonId(getUserId()));
+   $courses = getTeacherActiveCourses(getPersonId(getUserId()));
     $isCrOk = false;
     while($cr = mysqli_fetch_assoc($courses)) {
         if($cr['cour_id'] == $_POST['course-id']) {
@@ -43,11 +42,9 @@ if(isset($_POST['course-id']) && isset($_POST['student-id']) && isset($_POST['ab
         $_POST['abs-id-type'].", '".
         $comment."')");
     if(mysqli_errno(getConnection())) {
-        mysqli_rollback(getConnection());
         header("Location: /~kokurd/teacher/add_absence.php?success=false");
         exit;
     } else {
-        mysqli_commit(getConnection());
         header("Location: /~kokurd/teacher/add_absence.php?success=true");
         exit;
     }

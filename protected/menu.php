@@ -150,6 +150,7 @@ function createSideMenuContent($m_role) {
             <a href=\"/~kokurd/admin/add_user.php\">Dodaj użytkownika</a>
             <a href=\" /~kokurd/admin/remove_user.php\">Usuń użytkownika</a>
             <a href=\"/~kokurd/admin/remove_person.php\">Usuń osobę</a>
+            <a href=\"/~kokurd/admin/add_student_to_class.php\">Dodaj ucznia do klasy</a>
             ";
         case "teacher":
             return "

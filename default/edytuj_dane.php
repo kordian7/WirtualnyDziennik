@@ -19,6 +19,7 @@ if(isset($_POST['mail']) && $_POST['mail'] != null) {
         $_POST[$key] = strip_tags($_POST[$key]);
     }
     mysqli_autocommit(getConnection(),FALSE);
+    mysqli_query(getConnection(),"SET TRANSACTION ISOLATION LEVEL REPEATABLE READ");
     $person = getPersonInfo(getPersonId(getUserId()));
 
     if($_POST['mail'] != $person['mail']) {

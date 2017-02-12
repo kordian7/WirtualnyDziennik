@@ -12,9 +12,9 @@ if(isset($_POST['cour_id']) && $_POST['cour_id']!=null
 
 
 
-    echo "<div class='prnt-course-info'>
+    echo "<div class='prnt-course-info' > <h1 style='font-size: 18px;'>
             ".$person['name']." ".$person['surname']. " - ".$course['course_name']."
-        </div>
+        </h1></div> <br/>
     
     ";
 

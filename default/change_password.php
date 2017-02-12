@@ -21,6 +21,7 @@ if(isset($_POST['old-password']) && $_POST['old-password'] != null
         $_POST[$key] = mysqli_real_escape_string(getConnection(), $value);
     }
     mysqli_autocommit(getConnection(), false);
+    mysqli_query(getConnection(),"SET TRANSACTION ISOLATION LEVEL REPEATABLE READ");
     $user = getUserInfo(getUserId());
     if($_POST['old-password'] != $user['hashed_pwd']) {
         header("Location: /~kokurd/default/change_password.php?success=bad-pwd");
