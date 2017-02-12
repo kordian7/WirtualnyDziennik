@@ -36,6 +36,46 @@ createMenu(); ?>
 
 <br>
 <div class='main'>
+    <?php
+    if(isset($_GET['rm_sc']) && $_GET['rm_sc'] == 'true' ) {
+    echo "
+    <div class=\"alert alert-success alert-dismissable\">
+    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+    <strong>Sukces</strong> Usunięto egzamin
+    </div>
+
+    ";
+    }
+    if(isset($_GET['rm_sc']) && $_GET['rm_sc'] == 'false' ) {
+    echo "
+    <div class=\"alert alert-warning alert-dismissable\">
+    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+    <strong>Błąd</strong> Nie można usunąć niepustego egzaminu.
+    </div>
+
+    ";
+    }
+    if(isset($_GET['ed_sc']) && $_GET['ed_sc'] == 'true' ) {
+    echo "
+    <div class=\"alert alert-success alert-dismissable\">
+    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+    <strong>Sukces</strong> Oceny zmienione
+    </div>
+    
+    ";
+    }
+    if(isset($_GET['add_sc']) && $_GET['add_sc'] == 'true' ) {
+        echo "
+    <div class=\"alert alert-success alert-dismissable\">
+    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+    <strong>Sukces</strong> Egzamin dodany
+    </div>
+    
+    ";
+    }
+
+    ?>
+
 
     <div class="div-h-centered" style="width: 500px">
         <div style="text-align: center; font-size: 20px; ">

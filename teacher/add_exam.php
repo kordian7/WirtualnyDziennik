@@ -59,7 +59,7 @@ if(isset($_POST['exam-name']) && isset($_POST['course-id'])) {
         }
     }
     mysqli_commit(getConnection());
-    header("Location: /~kokurd/teacher/add_marks.php?course_id=".$_POST['course-id']);
+    header("Location: /~kokurd/teacher/add_marks.php?course_id=".$_POST['course-id']."&add_sc=true");
     exit;
 }
 createMenu();

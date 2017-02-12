@@ -79,7 +79,7 @@ if(isset($_POST['exam-id'])) {
         }
     }
     mysqli_commit(getConnection());
-    header("Location: /~kokurd/teacher/add_marks.php?course_id=".$examInfo['cour_id']);
+    header("Location: /~kokurd/teacher/add_marks.php?course_id=".$examInfo['cour_id']."&ed_sc=true");
     exit;
 }
 createMenu();

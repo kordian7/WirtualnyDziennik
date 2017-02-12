@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76c80591-d20d-4275-9545-a33f6035a707" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/add_student_to_class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/add_person.php" afterPath="$PROJECT_DIR$/admin/add_person.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/add_user.php" afterPath="$PROJECT_DIR$/admin/add_user.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/change_password.php" afterPath="$PROJECT_DIR$/default/change_password.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default/edytuj_dane.php" afterPath="$PROJECT_DIR$/default/edytuj_dane.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parent/show_absences.php" afterPath="$PROJECT_DIR$/parent/show_absences.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parent/student_course.php" afterPath="$PROJECT_DIR$/parent/student_course.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/menu.php" afterPath="$PROJECT_DIR$/protected/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/school_db_utils.php" afterPath="$PROJECT_DIR$/school_db_utils.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teacher/add_absence.php" afterPath="$PROJECT_DIR$/teacher/add_absence.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teacher/add_exam.php" afterPath="$PROJECT_DIR$/teacher/add_exam.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teacher/add_marks.php" afterPath="$PROJECT_DIR$/teacher/add_marks.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teacher/edit_marks.php" afterPath="$PROJECT_DIR$/teacher/edit_marks.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/teacher/remove_exam.php" afterPath="$PROJECT_DIR$/teacher/remove_exam.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -96,8 +85,8 @@
       <file leaf-file-name="add_absence.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teacher/add_absence.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+            <state relative-caret-position="345">
+              <caret line="59" column="4" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="76" selection-end-column="5" />
               <folding>
                 <marker date="1486933629418" expanded="true" signature="1232:1311" ph="insert into absence... " />
                 <marker date="1486933629418" expanded="true" signature="1232:1345" ph="insert into absence... " />
@@ -126,26 +115,26 @@
       <file leaf-file-name="add_exam.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teacher/add_exam.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="32" column="42" lean-forward="true" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+            <state relative-caret-position="546">
+              <caret line="61" column="98" lean-forward="false" selection-start-line="61" selection-start-column="86" selection-end-line="61" selection-end-column="98" />
               <folding>
-                <marker date="1486933672294" expanded="true" signature="1163:1332" ph="insert into exam... " />
-                <marker date="1486933672294" expanded="true" signature="1391:1508" ph="insert into exam... " />
-                <marker date="1486933672294" expanded="true" signature="2075:2335" ph="insert into exam_result... " />
-                <marker date="1486933672294" expanded="true" signature="2075:2371" ph="insert into exam_result... " />
-                <marker date="1486933672294" expanded="true" signature="2852:2869" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3331:3724" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3407" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3432" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3442" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3462" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3467" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3478" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3480" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3578" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3378:3724" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3495:3573" ph="..." />
-                <marker date="1486933672294" expanded="true" signature="3595:3703" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="1163:1332" ph="insert into exam... " />
+                <marker date="1486935571666" expanded="true" signature="1391:1508" ph="insert into exam... " />
+                <marker date="1486935571666" expanded="true" signature="2075:2335" ph="insert into exam_result... " />
+                <marker date="1486935571666" expanded="true" signature="2075:2371" ph="insert into exam_result... " />
+                <marker date="1486935571666" expanded="true" signature="2867:2884" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3346:3739" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3422" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3447" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3457" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3477" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3482" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3493" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3495" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3593" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3393:3739" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3510:3588" ph="..." />
+                <marker date="1486935571666" expanded="true" signature="3610:3718" ph="..." />
               </folding>
             </state>
           </provider>
@@ -154,41 +143,50 @@
       <file leaf-file-name="add_marks.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teacher/add_marks.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-210">
-              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-              <folding />
+            <state relative-caret-position="510">
+              <caret line="60" column="45" lean-forward="false" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
+              <folding>
+                <marker date="1486935525043" expanded="true" signature="1118:1264" ph="..." />
+                <marker date="1486935525043" expanded="true" signature="1198:1205" ph="×" />
+                <marker date="1486935525043" expanded="true" signature="1409:1574" ph="..." />
+                <marker date="1486935525043" expanded="true" signature="1489:1496" ph="×" />
+                <marker date="1486935525043" expanded="true" signature="1718:1863" ph="..." />
+                <marker date="1486935525043" expanded="true" signature="1798:1805" ph="×" />
+                <marker date="1486935525043" expanded="true" signature="2017:2161" ph="..." />
+                <marker date="1486935525043" expanded="true" signature="2097:2104" ph="×" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit_marks.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="edit_marks.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/teacher/edit_marks.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="21" column="84" lean-forward="false" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="84" />
+            <state relative-caret-position="744">
+              <caret line="81" column="90" lean-forward="false" selection-start-line="81" selection-start-column="90" selection-end-line="81" selection-end-column="90" />
               <folding>
-                <marker date="1486933703587" expanded="true" signature="1068:1143" ph="update exam " />
-                <marker date="1486933703587" expanded="true" signature="1466:1546" ph="update exam " />
-                <marker date="1486933703587" expanded="true" signature="2290:2329" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2330" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2331" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2370" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2371" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2372" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2373" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2374" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2430" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2290:2470" ph="insert into exam_result... " />
-                <marker date="1486933703587" expanded="true" signature="2638:2806" ph="update exam_... " />
-                <marker date="1486933703587" expanded="true" signature="3022:3173" ph="update exam_... " />
-                <marker date="1486933703587" expanded="true" signature="3362:3453" ph="delete from " />
-                <marker date="1486933703587" expanded="true" signature="3373:3453" ph="update exam_... " />
-                <marker date="1486933703587" expanded="true" signature="4144:4161" ph="..." />
-                <marker date="1486933703587" expanded="true" signature="4697:5196" ph="..." />
-                <marker date="1486933703587" expanded="true" signature="4744:4976" ph="..." />
-                <marker date="1486933703587" expanded="true" signature="4859:4971" ph="..." />
-                <marker date="1486933703587" expanded="true" signature="4993:5178" ph="..." />
-                <marker date="1486933703587" expanded="true" signature="5083:5160" ph="..." />
+                <marker date="1486935728387" expanded="true" signature="1068:1143" ph="update exam " />
+                <marker date="1486935728387" expanded="true" signature="1466:1546" ph="update exam " />
+                <marker date="1486935728387" expanded="true" signature="2290:2329" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2330" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2331" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2370" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2371" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2372" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2373" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2374" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2430" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2290:2470" ph="insert into exam_result... " />
+                <marker date="1486935728387" expanded="true" signature="2638:2806" ph="update exam_... " />
+                <marker date="1486935728387" expanded="true" signature="3022:3173" ph="update exam_... " />
+                <marker date="1486935728387" expanded="true" signature="3362:3453" ph="delete from " />
+                <marker date="1486935728387" expanded="true" signature="3373:3453" ph="update exam_... " />
+                <marker date="1486935728387" expanded="true" signature="4158:4175" ph="..." />
+                <marker date="1486935728387" expanded="true" signature="4711:5210" ph="..." />
+                <marker date="1486935728387" expanded="true" signature="4758:4990" ph="..." />
+                <marker date="1486935728387" expanded="true" signature="4873:4985" ph="..." />
+                <marker date="1486935728387" expanded="true" signature="5007:5192" ph="..." />
+                <marker date="1486935728387" expanded="true" signature="5097:5174" ph="..." />
               </folding>
             </state>
           </provider>
@@ -197,8 +195,8 @@
       <file leaf-file-name="remove_exam.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teacher/remove_exam.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="23" column="59" lean-forward="false" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="59" />
+            <state relative-caret-position="483">
+              <caret line="23" column="101" lean-forward="true" selection-start-line="23" selection-start-column="96" selection-end-line="23" selection-end-column="101" />
               <folding>
                 <marker date="1486933732192" expanded="true" signature="697:735" ph="select * fro... exam_result" />
                 <marker date="1486933732192" expanded="true" signature="982:1013" ph="delete from " />
@@ -217,7 +215,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="teacher_course.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="teacher_course.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/teacher/teacher_course.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="588">
@@ -256,6 +254,8 @@
       <find>pwd</find>
       <find>user</find>
       <find>mark</find>
+      <find>rm_s</find>
+      <find>sc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -278,7 +278,6 @@
         <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/css/wd.css" />
         <option value="$PROJECT_DIR$/default/role_change.php" />
-        <option value="$PROJECT_DIR$/teacher/add_marks.php" />
         <option value="$PROJECT_DIR$/teacher/home.php" />
         <option value="$PROJECT_DIR$/teacher/course_list.php" />
         <option value="$PROJECT_DIR$/teacher/course_student_list.php" />
@@ -312,9 +311,10 @@
         <option value="$PROJECT_DIR$/default/change_password.php" />
         <option value="$PROJECT_DIR$/default/edytuj_dane.php" />
         <option value="$PROJECT_DIR$/teacher/add_absence.php" />
+        <option value="$PROJECT_DIR$/teacher/remove_exam.php" />
+        <option value="$PROJECT_DIR$/teacher/add_marks.php" />
         <option value="$PROJECT_DIR$/teacher/add_exam.php" />
         <option value="$PROJECT_DIR$/teacher/edit_marks.php" />
-        <option value="$PROJECT_DIR$/teacher/remove_exam.php" />
       </list>
     </option>
   </component>
@@ -495,7 +495,7 @@
       <workItem from="1486208269352" duration="28143000" />
       <workItem from="1486289600595" duration="43095000" />
       <workItem from="1486374293698" duration="37598000" />
-      <workItem from="1486926697091" duration="6120000" />
+      <workItem from="1486926697091" duration="7257000" />
     </task>
     <task id="LOCAL-00001" summary="phpStorm test">
       <created>1483825389828</created>
@@ -536,7 +536,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203827000" />
+    <option name="totallyTimeSpent" value="204964000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -548,7 +548,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="960" height="1040" extended-state="1" />
+    <frame x="0" y="0" width="960" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2065678" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1186,10 +1186,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/teacher/show_absences.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher/teacher_course.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding>
+            <marker date="1486308712975" expanded="true" signature="802:838" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/teacher/add_absence.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="28" column="13" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        <state relative-caret-position="345">
+          <caret line="59" column="4" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="76" selection-end-column="5" />
           <folding>
             <marker date="1486933629418" expanded="true" signature="1232:1311" ph="insert into absence... " />
             <marker date="1486933629418" expanded="true" signature="1232:1345" ph="insert into absence... " />
@@ -1214,75 +1232,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teacher/add_exam.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="32" column="42" lean-forward="true" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
-          <folding>
-            <marker date="1486933672294" expanded="true" signature="1163:1332" ph="insert into exam... " />
-            <marker date="1486933672294" expanded="true" signature="1391:1508" ph="insert into exam... " />
-            <marker date="1486933672294" expanded="true" signature="2075:2335" ph="insert into exam_result... " />
-            <marker date="1486933672294" expanded="true" signature="2075:2371" ph="insert into exam_result... " />
-            <marker date="1486933672294" expanded="true" signature="2852:2869" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3331:3724" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3407" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3432" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3442" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3462" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3467" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3478" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3480" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3578" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3378:3724" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3495:3573" ph="..." />
-            <marker date="1486933672294" expanded="true" signature="3595:3703" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teacher/add_marks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teacher/edit_marks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="21" column="84" lean-forward="false" selection-start-line="21" selection-start-column="84" selection-end-line="21" selection-end-column="84" />
-          <folding>
-            <marker date="1486933703587" expanded="true" signature="1068:1143" ph="update exam " />
-            <marker date="1486933703587" expanded="true" signature="1466:1546" ph="update exam " />
-            <marker date="1486933703587" expanded="true" signature="2290:2329" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2330" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2331" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2370" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2371" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2372" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2373" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2374" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2430" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2290:2470" ph="insert into exam_result... " />
-            <marker date="1486933703587" expanded="true" signature="2638:2806" ph="update exam_... " />
-            <marker date="1486933703587" expanded="true" signature="3022:3173" ph="update exam_... " />
-            <marker date="1486933703587" expanded="true" signature="3362:3453" ph="delete from " />
-            <marker date="1486933703587" expanded="true" signature="3373:3453" ph="update exam_... " />
-            <marker date="1486933703587" expanded="true" signature="4144:4161" ph="..." />
-            <marker date="1486933703587" expanded="true" signature="4697:5196" ph="..." />
-            <marker date="1486933703587" expanded="true" signature="4744:4976" ph="..." />
-            <marker date="1486933703587" expanded="true" signature="4859:4971" ph="..." />
-            <marker date="1486933703587" expanded="true" signature="4993:5178" ph="..." />
-            <marker date="1486933703587" expanded="true" signature="5083:5160" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/teacher/remove_exam.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="23" column="59" lean-forward="false" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="59" />
+        <state relative-caret-position="483">
+          <caret line="23" column="101" lean-forward="true" selection-start-line="23" selection-start-column="96" selection-end-line="23" selection-end-column="101" />
           <folding>
             <marker date="1486933732192" expanded="true" signature="697:735" ph="select * fro... exam_result" />
             <marker date="1486933732192" expanded="true" signature="982:1013" ph="delete from " />
@@ -1290,20 +1243,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teacher/show_absences.php">
+    <entry file="file://$PROJECT_DIR$/teacher/add_exam.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="546">
+          <caret line="61" column="98" lean-forward="false" selection-start-line="61" selection-start-column="86" selection-end-line="61" selection-end-column="98" />
+          <folding>
+            <marker date="1486935571666" expanded="true" signature="1163:1332" ph="insert into exam... " />
+            <marker date="1486935571666" expanded="true" signature="1391:1508" ph="insert into exam... " />
+            <marker date="1486935571666" expanded="true" signature="2075:2335" ph="insert into exam_result... " />
+            <marker date="1486935571666" expanded="true" signature="2075:2371" ph="insert into exam_result... " />
+            <marker date="1486935571666" expanded="true" signature="2867:2884" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3346:3739" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3422" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3447" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3457" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3477" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3482" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3493" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3495" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3593" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3393:3739" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3510:3588" ph="..." />
+            <marker date="1486935571666" expanded="true" signature="3610:3718" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/teacher/teacher_course.php">
+    <entry file="file://$PROJECT_DIR$/teacher/add_marks.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+        <state relative-caret-position="510">
+          <caret line="60" column="45" lean-forward="false" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
           <folding>
-            <marker date="1486308712975" expanded="true" signature="802:838" ph="..." />
+            <marker date="1486935525043" expanded="true" signature="1118:1264" ph="..." />
+            <marker date="1486935525043" expanded="true" signature="1198:1205" ph="×" />
+            <marker date="1486935525043" expanded="true" signature="1409:1574" ph="..." />
+            <marker date="1486935525043" expanded="true" signature="1489:1496" ph="×" />
+            <marker date="1486935525043" expanded="true" signature="1718:1863" ph="..." />
+            <marker date="1486935525043" expanded="true" signature="1798:1805" ph="×" />
+            <marker date="1486935525043" expanded="true" signature="2017:2161" ph="..." />
+            <marker date="1486935525043" expanded="true" signature="2097:2104" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher/edit_marks.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="81" column="90" lean-forward="false" selection-start-line="81" selection-start-column="90" selection-end-line="81" selection-end-column="90" />
+          <folding>
+            <marker date="1486935728387" expanded="true" signature="1068:1143" ph="update exam " />
+            <marker date="1486935728387" expanded="true" signature="1466:1546" ph="update exam " />
+            <marker date="1486935728387" expanded="true" signature="2290:2329" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2330" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2331" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2370" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2371" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2372" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2373" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2374" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2430" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2290:2470" ph="insert into exam_result... " />
+            <marker date="1486935728387" expanded="true" signature="2638:2806" ph="update exam_... " />
+            <marker date="1486935728387" expanded="true" signature="3022:3173" ph="update exam_... " />
+            <marker date="1486935728387" expanded="true" signature="3362:3453" ph="delete from " />
+            <marker date="1486935728387" expanded="true" signature="3373:3453" ph="update exam_... " />
+            <marker date="1486935728387" expanded="true" signature="4158:4175" ph="..." />
+            <marker date="1486935728387" expanded="true" signature="4711:5210" ph="..." />
+            <marker date="1486935728387" expanded="true" signature="4758:4990" ph="..." />
+            <marker date="1486935728387" expanded="true" signature="4873:4985" ph="..." />
+            <marker date="1486935728387" expanded="true" signature="5007:5192" ph="..." />
+            <marker date="1486935728387" expanded="true" signature="5097:5174" ph="..." />
           </folding>
         </state>
       </provider>
